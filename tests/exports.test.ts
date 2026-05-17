@@ -5,7 +5,7 @@ import { csvExport } from '../src/lib/exports/csv';
 import { pdfExportSingle } from '../src/lib/exports/pdf';
 import { filterControls, emptyFilterState } from '../src/lib/filters';
 import { searchControls } from '../src/lib/search';
-import type { Control } from '../src/content/config';
+import type { Control } from '../src/content/schemas';
 
 const controlsDir = join(__dirname, '../src/content/controls');
 const controls: Control[] = readdirSync(controlsDir)

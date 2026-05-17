@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { controlSchema, frameworkSchema } from '../src/content/config';
+import { controlSchema, frameworkSchema } from '../src/content/schemas';
 
 const controlsDir = join(__dirname, '../src/content/controls');
 const frameworksDir = join(__dirname, '../src/content/frameworks');
