@@ -1,0 +1,91 @@
+{
+  "id": "AI-CTRL-006",
+  "version": "1.0.0",
+  "title": "Human-in-the-Loop Design for High-Risk Decisions",
+  "category": "Human Oversight",
+  "control_type": "preventive",
+  "lifecycle_stage": ["Strategy & Planning", "Deployment", "Operation & Monitoring"],
+  "risk_domain": ["Governance", "People & Process"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Traditional ML", "Generative AI", "Recommender"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid", "Edge"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "Banking", "Healthcare", "Public sector"],
+    "company_size": ["MidMarket", "Enterprise"]
+  },
+  "objective": "Ensure that AI systems producing decisions with legal or similarly significant effects on individuals incorporate meaningful human oversight in the decision flow, with documented design, training, and audit trails.",
+  "rationale": "EU AI Act Article 14 requires human oversight for high-risk systems; sectoral regulators (e.g., OSFI E-23 on credit decisioning) and anti-discrimination law require contestability of automated decisions. 'Human-in-the-loop' as theater — a single 'approve' button with no time to review — fails both regulatory and ethical scrutiny. Meaningful oversight requires designed friction, qualified reviewers, and an audit trail.",
+  "control_narrative": "For each AI system whose decisions produce legal or similarly significant effects on individuals (e.g., credit, employment, benefits, healthcare, education, content removal), the organization designs and documents human oversight: where in the flow a human reviews (pre-decision / post-decision / appeal), who is qualified to review, the information provided to the reviewer, time-to-decision minimums for meaningful review, override capability with rationale capture, and audit logging. Reviewer training is mandatory and refreshed at least annually. Oversight performance (override rate, time-per-decision, sample re-review accuracy) is monitored and reported quarterly to the AI Governance committee.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the Human Oversight standard and confirm scope criteria (which systems qualify) and required design elements (reviewer qualifications, information provided, minimum review time, override + rationale, audit logging).",
+      "Confirm training requirement and refresh cadence for reviewers.",
+      "Confirm performance monitoring requirement (override rate, time-per-decision, accuracy sampling).",
+      "Confirm escalation path when oversight signals systemic issues (e.g., override rate above threshold)."
+    ],
+    "inquiries": [
+      "Who designs the human oversight flow for a new high-risk AI system?",
+      "How is reviewer competency assessed?",
+      "How is 'meaningful review' time calibrated for different decision types?",
+      "How are contested decisions (appeals) handled?",
+      "How are systemic oversight failures (high override rate, low accuracy) escalated?"
+    ],
+    "inspections": [
+      "Human Oversight standard.",
+      "Oversight design documents for sampled systems.",
+      "Reviewer training records and competency criteria.",
+      "Quarterly oversight performance reports.",
+      "Audit logs from a sample of overseen decisions."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the AI System Inventory, select a sample of in-scope high-risk-decision AI systems.",
+      "For each sampled system, obtain the oversight design document and confirm it specifies reviewer role, qualifications, information shown, minimum review time, override capability, and audit logging.",
+      "Inspect a sample of audit logs and confirm: reviewer identity, time-on-decision, decision (approve/override), rationale (if override).",
+      "Compute the actual time-per-decision distribution and confirm it meets the documented minimum for meaningful review.",
+      "Inspect reviewer training records and confirm currency.",
+      "Inspect quarterly oversight performance reports and confirm systemic issues were investigated and addressed."
+    ],
+    "sample_size_guidance": {
+      "population_type": "In-scope high-risk-decision AI systems",
+      "low_risk": "5 systems × 25 decisions each",
+      "moderate_risk": "10 systems × 25 decisions each",
+      "high_risk": "All in-scope systems × 50 decisions each, or 100% of EU AI Act high-risk"
+    },
+    "reperformance_steps": [
+      "For 1 sampled system, re-perform the reviewer's task on 3 archived decisions using the same information set and compare conclusions."
+    ]
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "Human Oversight standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Oversight design documents per sampled system", "format": "PDF/Word", "frequency": "Per sample" },
+      { "item": "Reviewer training records", "format": "HR export", "frequency": "Per sample" },
+      { "item": "Audit logs of overseen decisions", "format": "System export", "frequency": "Per sample" },
+      { "item": "Quarterly oversight performance reports", "format": "PDF/Excel", "frequency": "Quarterly" }
+    ],
+    "supporting": [
+      { "item": "Appeal/contestation records", "format": "System export", "frequency": "Per sample" }
+    ],
+    "retention_period": "7 years for regulated environments; 3 years otherwise"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["8.2", "8.3"],
+    "nist_ai_rmf": ["GOVERN-3.2", "MAP-5.2", "MEASURE-3.3"],
+    "eu_ai_act": ["Article 14"],
+    "owasp_agentic_top_10": ["AAI04"]
+  },
+  "related_controls": ["AI-CTRL-005", "AI-CTRL-007", "AI-CTRL-019"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "EU AI Act Article 14 — Human Oversight", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" },
+    { "title": "ISO/IEC 42001:2023 — AI management systems, clause 8.2", "url": "https://www.iso.org/standard/81230.html" },
+    { "title": "NIST AI RMF — GOVERN-3 Human Oversight", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+  ]
+}

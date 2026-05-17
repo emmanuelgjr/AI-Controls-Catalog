@@ -1,0 +1,93 @@
+{
+  "id": "AI-CTRL-010",
+  "version": "1.0.0",
+  "title": "Model Versioning and Change Control",
+  "category": "Change Management",
+  "control_type": "preventive",
+  "lifecycle_stage": ["Training", "Evaluation & Testing", "Deployment", "Operation & Monitoring"],
+  "risk_domain": ["Model", "Infrastructure"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Traditional ML", "Computer Vision", "Generative AI", "Multi-modal", "Recommender"],
+    "deployment_models": ["Self-hosted", "Hybrid", "Edge", "Embedded"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "NIST AI RMF", "Banking", "Healthcare"],
+    "company_size": ["MidMarket", "Enterprise"]
+  },
+  "objective": "Ensure that every model promoted to production is uniquely versioned, traceable to its training data, evaluation results, and approval, and subject to controlled change-management with rollback capability.",
+  "rationale": "Model changes can introduce regressions invisible to traditional change-control reviewers (a 2% accuracy drop on a protected subgroup, drift in calibration, new failure modes). Without versioning, organizations cannot reproduce a specific request's behavior, audit decision outcomes, or roll back when a regression is detected. EU AI Act Article 17 (quality management system) and ISO/IEC 42001 clause 8.3 require versioned, controlled change.",
+  "control_narrative": "Every production model has a unique version identifier traceable to: training data snapshot (provenance records per AI-CTRL-002), training configuration, evaluation results (including fairness and adversarial robustness), approving authority, and deployment date. Model promotion to production follows a documented change-management flow with separation of duties between author and approver, mandatory pre-production evaluation gate (AI-CTRL-017), and rollback plan. Material change criteria are defined (e.g., > X% drift on key metric, new training data category, new tool/permission for agentic systems) and trigger re-evaluation. Customer-impacting model changes follow a notification cadence appropriate to the use case (e.g., enterprise tier of foundation models communicate model version with each response).",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the Model Change Control standard and confirm scope, versioning scheme, and required traceability fields.",
+      "Confirm separation of duties between model author and approver.",
+      "Confirm pre-production evaluation gate is required prior to promotion.",
+      "Confirm material-change criteria are defined and trigger re-evaluation.",
+      "Confirm rollback capability is required as part of the deployment plan.",
+      "Confirm customer notification policy for model changes where applicable."
+    ],
+    "inquiries": [
+      "Who approves model promotion to production?",
+      "How is rollback tested? How fast is it?",
+      "How are silent model changes from third-party providers detected (e.g., a SaaS LLM's underlying model changes)?",
+      "How are A/B or canary deployments governed?"
+    ],
+    "inspections": [
+      "Model Change Control standard.",
+      "Model registry sample showing versioning, lineage, and approvals.",
+      "Sample change records for sampled model promotions.",
+      "Rollback procedure documentation and test records."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the inventory, sample production models promoted in the audit period.",
+      "For each sampled promotion, inspect the model registry entry and confirm: unique version, training-data lineage, evaluation results attached, approver identity, deployment date.",
+      "Confirm separation of duties was enforced (author ≠ approver).",
+      "Confirm pre-production evaluation results meet the documented thresholds.",
+      "For any production rollback in the audit period, confirm the rollback procedure was followed and root cause was investigated.",
+      "Inspect material-change re-evaluation records for any qualifying change.",
+      "For SaaS-foundation-model dependents, confirm vendor-notified model changes were reviewed and re-evaluated."
+    ],
+    "sample_size_guidance": {
+      "population_type": "Production model promotions in audit period",
+      "low_risk": "5 promotions",
+      "moderate_risk": "10 promotions",
+      "high_risk": "25 promotions or 100% of EU AI Act high-risk system updates"
+    },
+    "reperformance_steps": [
+      "For 1 sampled model, independently re-run a subset of the documented evaluation suite on the deployed version and compare to recorded results."
+    ]
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "Model Change Control standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Model registry export", "format": "CSV/JSON", "frequency": "At fieldwork" },
+      { "item": "Change records for sampled promotions", "format": "System export / PDF", "frequency": "Per sample" },
+      { "item": "Pre-production evaluation reports", "format": "PDF / Notebook", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Rollback test records", "format": "PDF / system export", "frequency": "Annual" },
+      { "item": "Vendor model change notifications and internal responses", "format": "Email / ticket export", "frequency": "Per occurrence" }
+    ],
+    "retention_period": "Lifetime of the model + 7 years after retirement (regulated); + 3 years (otherwise)"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["8.3", "8.4"],
+    "nist_ai_rmf": ["MANAGE-2.4", "MEASURE-3.2"],
+    "eu_ai_act": ["Article 17"],
+    "owasp_llm_top_10": ["LLM05:2025"],
+    "soc_2": ["CC8.1"]
+  },
+  "related_controls": ["AI-CTRL-002", "AI-CTRL-017", "AI-CTRL-018"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "EU AI Act Article 17 — Quality management system", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" },
+    { "title": "ISO/IEC 42001:2023, clause 8.3", "url": "https://www.iso.org/standard/81230.html" },
+    { "title": "NIST AI RMF — MANAGE-2 Risk Management Actions", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+  ]
+}

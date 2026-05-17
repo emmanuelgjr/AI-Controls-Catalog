@@ -1,0 +1,98 @@
+{
+  "id": "AI-CTRL-002",
+  "version": "1.0.0",
+  "title": "Training Data Provenance and Lineage",
+  "category": "Data Governance",
+  "control_type": "preventive",
+  "lifecycle_stage": ["Data Sourcing & Preparation", "Training"],
+  "risk_domain": ["Data", "Third Party"],
+  "applicability": {
+    "ai_types": ["LLM", "Traditional ML", "Computer Vision", "Generative AI", "Recommender"],
+    "deployment_models": ["Self-hosted", "Hybrid"],
+    "regulatory_regimes": ["EU AI Act", "GDPR", "HIPAA", "Banking", "ISO 42001", "NIST AI RMF"],
+    "company_size": ["MidMarket", "Enterprise"]
+  },
+  "objective": "Establish and maintain documented provenance and lineage for all training, fine-tuning, and evaluation data used by AI systems, including legal basis, licensing, sensitivity classification, and transformations applied.",
+  "rationale": "Training data shapes model behavior, embeds legal and ethical risk, and is a primary vector for downstream IP, privacy, and regulatory exposure. Without provenance and lineage, organizations cannot defend training-data choices to regulators, respond to data-subject rights requests, audit fine-tuning supply chains, or remediate when a source is later found to be tainted (poisoned, copyrighted, or unlawfully obtained).",
+  "control_narrative": "For every AI system within scope, the organization maintains a Data Provenance Record covering all datasets used in training, fine-tuning, evaluation, and reinforcement-learning feedback. Each entry captures: source (internal system, licensed vendor, public dataset, scraped, synthetic, customer-supplied), acquisition date, legal basis (license, contract, consent, lawful processing ground), data classification, presence of personal data (and categories per applicable privacy law), curation steps applied (deduplication, filtering, balancing, anonymization), transformations, and approver. Approval for use is documented prior to training and re-affirmed annually. Where data is sourced from third parties, contracts include warranties of provenance and rights to use for AI training. The record is owned by the AI Governance lead, accessible to internal audit, and exportable for regulatory inquiry.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the Data Provenance policy or standard and confirm scope includes all training, fine-tuning, evaluation, and feedback data across the AI system inventory.",
+      "Confirm the Data Provenance Record schema captures: source, acquisition date, legal basis, classification, personal data presence and categories, curation steps, transformations, approver, and re-affirmation date.",
+      "Confirm approval workflow requires Data Governance, Legal, and AI Governance sign-off prior to training-data use.",
+      "Confirm third-party data contracts include explicit warranties of rights to use for AI training (training-rights clause).",
+      "Confirm integration with the AI System Inventory (AI-CTRL-001) so every AI system in production references its provenance records."
+    ],
+    "inquiries": [
+      "Who owns the Data Provenance Record?",
+      "How are existing training datasets re-verified when AI systems are repurposed for a different use case?",
+      "How are scraped or web-sourced datasets handled? What approval do they require?",
+      "How is synthetic data — including AI-generated synthetic data — classified and approved?",
+      "What is the process when a dataset's licensing or legal basis later becomes problematic?"
+    ],
+    "inspections": [
+      "Data Provenance policy / standard.",
+      "Data Provenance Record schema or data dictionary.",
+      "Approval workflow documentation and a sample of approval records.",
+      "Sample third-party data contracts with training-rights clauses.",
+      "Mapping linking AI systems in the inventory to provenance records."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the AI System Inventory, select a sample of AI systems trained or fine-tuned during the audit period.",
+      "For each sampled system, obtain the Data Provenance Records and confirm all fields are populated.",
+      "Trace a sample of records to source artifacts: contracts (third-party), data subject consent records (personal data), license attestations (open datasets), platform agreements (customer-supplied data).",
+      "Re-derive the legal basis for at least 3 records using contract / consent / license inspection and compare to the recorded legal basis.",
+      "For systems handling personal data, confirm the record identifies categories of personal data and confirm consistency with the system's privacy impact assessment.",
+      "Confirm approval signatures from Data Governance, Legal, and AI Governance pre-dated training start dates.",
+      "Identify any datasets that were re-purposed from one AI system to another in the audit period and confirm re-approval occurred.",
+      "Confirm at least one annual re-affirmation per sampled system occurred or is scheduled."
+    ],
+    "sample_size_guidance": {
+      "population_type": "AI systems trained or fine-tuned during the audit period",
+      "low_risk": "5 systems × 3 datasets each",
+      "moderate_risk": "10 systems × 3 datasets each",
+      "high_risk": "25 systems × 5 datasets each, or 100% of EU AI Act high-risk systems"
+    },
+    "reperformance_steps": [
+      "For 2 sampled datasets, independently re-derive the data classification by inspecting a sample of records and compare to recorded classification.",
+      "For 1 third-party dataset, independently confirm the licensing terms permit AI training use by reading the source license."
+    ]
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "Data Provenance Record export (current state)", "format": "CSV/Excel/JSON", "frequency": "At fieldwork" },
+      { "item": "Data Provenance policy / standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Approval workflow records for sampled systems", "format": "System export / screenshots", "frequency": "Per sample" },
+      { "item": "Third-party data contracts (training-rights clauses)", "format": "PDF", "frequency": "Per sample" },
+      { "item": "License attestations for open datasets", "format": "PDF / screenshot", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Annual re-affirmation records", "format": "System export", "frequency": "Annual" },
+      { "item": "Privacy Impact Assessments referencing the dataset(s)", "format": "PDF", "frequency": "Per sample" }
+    ],
+    "retention_period": "Lifetime of the AI system + 7 years after retirement (regulated environments); + 3 years (otherwise)"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["7.4", "8.2", "8.3"],
+    "nist_ai_rmf": ["MAP-2.3", "MAP-4.1", "MEASURE-2.10", "MEASURE-2.11"],
+    "eu_ai_act": ["Article 10", "Article 11", "Article 12"],
+    "owasp_dsgai": ["DSGAI03", "DSGAI04", "DSGAI05"],
+    "owasp_llm_top_10": ["LLM03:2025"]
+  },
+  "related_controls": ["AI-CTRL-001", "AI-CTRL-013", "AI-CTRL-015"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "ISO/IEC 42001:2023 — AI management systems, clause 7.4", "url": "https://www.iso.org/standard/81230.html" },
+    { "title": "NIST AI RMF — MAP-2.3, MEASURE-2.10", "url": "https://www.nist.gov/itl/ai-risk-management-framework" },
+    { "title": "EU AI Act, Articles 10–12", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" },
+    { "title": "OWASP GenAI Data Security 2026 — DSGAI03 Training Data Governance", "url": "https://genai.owasp.org/" }
+  ]
+}

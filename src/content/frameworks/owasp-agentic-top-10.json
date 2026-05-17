@@ -1,0 +1,9 @@
+{
+  "slug": "owasp-agentic-top-10",
+  "name": "OWASP Agentic AI Top 10",
+  "short_name": "OWASP Agentic Top 10",
+  "publisher": "OWASP GenAI Security Project",
+  "description": "Ranked list of the most critical security risks for agentic AI systems — combining LLMs with tools, memory, and autonomy.",
+  "color_mark": "#A21CAF",
+  "url": "https://genai.owasp.org/"
+}

@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Methodology — AI Controls Catalog"
+  description="How AI Controls Catalog is built, sourced, reviewed, versioned, and aligned to standards."
+>
+  <section class="max-w-content mx-auto px-6 lg:px-8 py-12">
+    <p class="text-sm font-medium text-accent-700">Methodology</p>
+    <h1 class="font-display font-semibold text-3xl md:text-4xl tracking-tight text-ink-900 mt-2">
+      How this catalog is built
+    </h1>
+
+    <div class="prose prose-lg max-w-prose-wide mt-8">
+      <h2>Control authorship</h2>
+      <p>
+        Every control is hand-authored by an IT auditor with field experience.
+        No control is AI-generated. The author is named on each control and on
+        the changelog. Where contributors propose controls, they are
+        attributed and the merging maintainer is named as reviewer.
+      </p>
+
+      <h2>Quality bar</h2>
+      <p>A control is not shipped until it meets all of the following:</p>
+      <ol>
+        <li>All schema fields are populated — no nulls, no TODOs.</li>
+        <li>Test of Design has at least three procedures, inquiries, and inspections.</li>
+        <li>Test of Operating Effectiveness has at least three procedures and explicit sample-size guidance.</li>
+        <li>At least three framework mappings with valid clause/section references.</li>
+        <li>Evidence requirements include format and retention.</li>
+        <li>Changelog has at least an initial entry.</li>
+        <li>References include at least two authoritative sources.</li>
+      </ol>
+
+      <h2>Framework mappings</h2>
+      <p>
+        Mappings reflect the author's reading of the cited standard, supported
+        where applicable by the OWASP GenAI Security crosswalk and primary
+        source review. Mappings are reviewed quarterly because frameworks
+        evolve (the EU AI Act is being implemented in stages; OWASP lists are
+        revised annually).
+      </p>
+
+      <h2>Versioning</h2>
+      <p>
+        Controls use semantic versioning. Every substantive change increments
+        the minor or patch version with a dated changelog entry. The
+        <code>last_reviewed</code> field is updated on every review even
+        without content change, so consumers can see which controls have been
+        affirmed recently.
+      </p>
+
+      <h2>Review cadence</h2>
+      <ul>
+        <li>Framework mappings: quarterly.</li>
+        <li>Long-form sections (objective, narrative): annually.</li>
+        <li>Sample sizes and evidence requirements: annually or upon material regulatory development.</li>
+      </ul>
+
+      <h2>Limits and disclaimers</h2>
+      <p>
+        This catalog is a reference, not regulatory advice. Specific
+        engagements should validate framework references against the current
+        published version. Where the catalog and a regulator disagree, the
+        regulator wins — please open an issue with the citation so the
+        catalog can be corrected.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

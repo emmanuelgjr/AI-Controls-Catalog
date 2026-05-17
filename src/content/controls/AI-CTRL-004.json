@@ -1,0 +1,98 @@
+{
+  "id": "AI-CTRL-004",
+  "version": "1.0.0",
+  "title": "Third-Party AI Vendor Due Diligence",
+  "category": "Third-Party AI",
+  "control_type": "preventive",
+  "lifecycle_stage": ["Strategy & Planning", "Deployment", "Operation & Monitoring"],
+  "risk_domain": ["Third Party", "Data", "Model"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Generative AI", "Traditional ML", "Computer Vision", "Multi-modal"],
+    "deployment_models": ["SaaS", "Hybrid"],
+    "regulatory_regimes": ["EU AI Act", "GDPR", "Banking", "Healthcare", "ISO 42001", "NIST AI RMF"],
+    "company_size": ["MidMarket", "Enterprise"]
+  },
+  "objective": "Ensure that third-party AI products and AI-enabled services are subject to risk-based due diligence covering data handling, model provenance, security testing, incident response, compliance posture, and contractual safeguards before procurement and on an ongoing basis.",
+  "rationale": "Most enterprises consume AI through third-party SaaS rather than building it. Vendor data-handling defaults (training-on-prompts, sub-processor sprawl, unclear deletion guarantees) create the most acute and most common AI risk vectors. Standardized due diligence at intake and on renewal is the only scalable defense; it also satisfies EU AI Act deployer obligations and supervisory expectations (OSFI B-10, OCC third-party guidance).",
+  "control_narrative": "Every AI product or AI-enabled service intended for production use undergoes structured due diligence using the AI Vendor Questionnaire prior to contract signature, and on renewal. The questionnaire covers vendor profile, data handling (training use of customer data, isolation, residency, retention, deletion), model provenance, security testing and certifications (SOC 2 Type II, ISO 27001, ISO 42001), incident response, compliance posture (EU AI Act, GDPR, sectoral law), contractual provisions (IP indemnity, audit rights, termination assistance, deprecation notice), and operational continuity. A weighted score and explicit red-flag triggers produce a risk-tier classification (Low / Moderate / High / Reject). The AI Governance lead, jointly with Procurement and Legal, owns the process. Findings flow to the AI Risk Register and high-tier vendors enter quarterly monitoring.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the Third-Party AI Vendor Policy and confirm it requires structured due diligence before procurement and on renewal for any AI-enabled product/service.",
+      "Confirm the AI Vendor Questionnaire exists and covers, at minimum: data handling, model provenance, security testing, incident response, compliance, contractual provisions, operational continuity.",
+      "Confirm the scoring methodology is documented, including weights and red-flag triggers that fail a vendor regardless of total score.",
+      "Confirm Procurement intake routes any AI-enabled product to the AI Governance lead for assessment.",
+      "Confirm contracts include required AI-specific clauses (IP indemnification covering training data, training-use of customer data terms, deprecation notice, audit rights, deletion certificate).",
+      "Confirm linkage to the AI System Inventory (AI-CTRL-001) and Risk Register so vendor risk is tracked."
+    ],
+    "inquiries": [
+      "Who owns the AI vendor assessment process?",
+      "How is an AI product distinguished from a non-AI product at intake?",
+      "What is the override path if a business team wants to proceed despite a 'High' or 'Reject' classification?",
+      "How are vendors re-assessed on contract renewal or material model change?",
+      "How is sub-processor risk handled when the AI vendor relies on another foundation model provider?"
+    ],
+    "inspections": [
+      "Third-Party AI Vendor Policy.",
+      "AI Vendor Questionnaire template and scoring rubric.",
+      "Procurement intake workflow documentation.",
+      "Sample of completed assessments and resulting scorecards.",
+      "Standard AI contract clauses / addenda."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "For the audit period, obtain the population of AI-related vendor contracts signed or renewed.",
+      "For a sample, confirm a completed AI Vendor Questionnaire pre-dated contract signature/renewal.",
+      "For each sampled assessment, confirm scoring was applied per the rubric and risk-tier classification matches the resulting score and red flags.",
+      "For any 'High' or 'Reject' classifications that proceeded to contract, confirm documented override approval at the required level (typically CISO or CRO).",
+      "For a sample, confirm executed contracts include required AI-specific clauses by inspecting the contract directly.",
+      "For 'High'-tier vendors, confirm quarterly monitoring activities occurred (re-scoring, news/incident monitoring, SOC 2 bridge letter reviews)."
+    ],
+    "sample_size_guidance": {
+      "population_type": "AI-related vendor contracts signed or renewed in audit period",
+      "low_risk": "5 vendors",
+      "moderate_risk": "10 vendors",
+      "high_risk": "25 vendors or 100% of 'High'-tier classifications"
+    },
+    "reperformance_steps": [
+      "For 2 sampled vendors, independently re-score the questionnaire using the source documentation provided by the vendor and compare to recorded score.",
+      "For 1 sampled contract, independently confirm presence of the required AI-specific clauses against the contract redline."
+    ]
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "Third-Party AI Vendor Policy", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Completed AI Vendor Questionnaires for sampled vendors", "format": "PDF/Word", "frequency": "Per sample" },
+      { "item": "Scored vendor scorecards", "format": "PDF/Excel", "frequency": "Per sample" },
+      { "item": "Executed contracts (relevant AI-specific clauses)", "format": "PDF", "frequency": "Per sample" },
+      { "item": "Override approval records for High/Reject vendors that proceeded", "format": "Email/system record", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Vendor SOC 2 Type II reports, ISO 27001/42001 certificates", "format": "PDF", "frequency": "Per sample" },
+      { "item": "Quarterly monitoring artifacts for High-tier vendors", "format": "System export", "frequency": "Quarterly" }
+    ],
+    "retention_period": "Lifetime of vendor relationship + 7 years after termination (regulated); + 3 years (otherwise)"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["8.2", "8.3", "8.4"],
+    "nist_ai_rmf": ["GOVERN-6.1", "GOVERN-6.2", "MAP-4.1", "MANAGE-3.1"],
+    "eu_ai_act": ["Article 25", "Article 26", "Article 28"],
+    "owasp_dsgai": ["DSGAI06", "DSGAI07"],
+    "soc_2": ["CC9.2"],
+    "osfi_e21": ["Principle 3"]
+  },
+  "related_controls": ["AI-CTRL-001", "AI-CTRL-005", "AI-CTRL-013"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "ISO/IEC 42001:2023 — AI management systems, clause 8.4", "url": "https://www.iso.org/standard/81230.html" },
+    { "title": "NIST AI RMF — GOVERN-6 Third-Party Management", "url": "https://www.nist.gov/itl/ai-risk-management-framework" },
+    { "title": "EU AI Act, Articles 25–28", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" },
+    { "title": "OSFI Guideline B-10 — Third-Party Risk Management", "url": "https://www.osfi-bsif.gc.ca/" }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "id": "AI-CTRL-007",
+  "version": "1.0.0",
+  "title": "Output Filtering and Content Moderation",
+  "category": "Inference & Output",
+  "control_type": "preventive",
+  "lifecycle_stage": ["Deployment", "Operation & Monitoring"],
+  "risk_domain": ["Model", "Data"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Generative AI", "Multi-modal"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid", "Edge"],
+    "regulatory_regimes": ["EU AI Act", "GDPR", "ISO 42001", "Banking", "Healthcare", "Public sector"],
+    "company_size": ["SMB", "MidMarket", "Enterprise"]
+  },
+  "objective": "Apply layered output filtering and content moderation to LLM and generative AI systems to prevent disclosure of sensitive data, prohibited content, executable payloads, and policy-violating outputs.",
+  "rationale": "Model outputs are an attack surface: prompt injection, training-data extraction, system-prompt leakage, hallucinated PII, code with embedded SSRF/XSS, and policy violations all manifest as output content. OWASP LLM02 (Insecure Output Handling) and LLM06 (Sensitive Information Disclosure) describe the harm pattern. Output controls complement input controls and must be designed as defense in depth.",
+  "control_narrative": "Every production LLM/generative system applies output controls before content is returned to users, stored, or passed to downstream tools. The output pipeline performs, at minimum: (a) sensitive-data scanning (PII, secrets, regulated identifiers, internal classifiers); (b) prohibited-content moderation (per acceptable-use policy and applicable sectoral rules); (c) system-prompt/IP leakage detection; (d) executable-content handling (HTML/JS escaping for chat surfaces; sandboxed rendering for code; URL allow-listing for outbound links); and (e) hallucination flags (claim verification for high-risk domains). Bypass requires documented business justification and compensating controls. Output events are logged with content fingerprints (not raw content) for incident response.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the Output Filtering standard and confirm coverage of sensitive-data, prohibited-content, system-prompt leakage, executable-content handling, and hallucination flagging.",
+      "Confirm bypass requires documented justification and compensating controls.",
+      "Confirm logging captures sufficient metadata for incident response without storing raw sensitive content.",
+      "Confirm integration with the AI System Inventory so every production LLM/generative system is mapped to its output pipeline.",
+      "Confirm change-management process for output rules (additions, threshold tuning, rollbacks)."
+    ],
+    "inquiries": [
+      "Who owns the output filter rule set?",
+      "How are new sensitive-data patterns added (e.g., new product identifiers)?",
+      "How is false-positive impact monitored (over-blocking that degrades usability)?",
+      "How are bypass requests handled and reviewed?",
+      "How is content moderation handled for non-English languages?"
+    ],
+    "inspections": [
+      "Output Filtering standard.",
+      "Configured output rule sets for sampled systems.",
+      "Bypass request samples with documented justification.",
+      "Output event logs.",
+      "Quarterly tuning reports."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the inventory, sample production LLM/generative systems.",
+      "For each, inspect the output pipeline configuration and confirm coverage of mandatory categories.",
+      "Submit a battery of canonical probes (PII patterns, prompt-leakage probes, code-injection probes) in a non-production replica and confirm outputs are blocked or transformed per policy.",
+      "Sample output event logs and confirm appropriate metadata is captured.",
+      "Sample bypass approvals and confirm justification and compensating-control documentation.",
+      "Confirm quarterly tuning occurred and false-positive rates are within tolerance."
+    ],
+    "sample_size_guidance": {
+      "population_type": "Production LLM/generative AI systems",
+      "low_risk": "5 systems × 10 probes each",
+      "moderate_risk": "10 systems × 15 probes each",
+      "high_risk": "All in-scope systems × 25 probes each"
+    },
+    "reperformance_steps": [
+      "For 1 sampled system, independently exercise 5 PII-extraction probes from a controlled corpus and verify all are blocked or transformed."
+    ]
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "Output Filtering standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Output rule-set configurations per sampled system", "format": "Config export / screenshots", "frequency": "Per sample" },
+      { "item": "Output event log samples", "format": "System export", "frequency": "Per sample" },
+      { "item": "Bypass approval records", "format": "Workflow export", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Quarterly tuning reports", "format": "PDF/Excel", "frequency": "Quarterly" }
+    ],
+    "retention_period": "1 year for output event metadata; 7 years for incident-related records (regulated)"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["8.3"],
+    "nist_ai_rmf": ["MANAGE-2.2", "MEASURE-2.7"],
+    "eu_ai_act": ["Article 15", "Article 50"],
+    "owasp_llm_top_10": ["LLM02:2025", "LLM06:2025"],
+    "owasp_agentic_top_10": ["AAI02"],
+    "owasp_dsgai": ["DSGAI11", "DSGAI12"]
+  },
+  "related_controls": ["AI-CTRL-003", "AI-CTRL-013", "AI-CTRL-019"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "OWASP LLM02:2025 — Insecure Output Handling", "url": "https://genai.owasp.org/llm-top-10/" },
+    { "title": "OWASP LLM06:2025 — Sensitive Information Disclosure", "url": "https://genai.owasp.org/llm-top-10/" },
+    { "title": "EU AI Act Article 50 — Transparency Obligations", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" }
+  ]
+}

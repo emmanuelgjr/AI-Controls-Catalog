@@ -1,0 +1,43 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-ink-200 bg-ink-50 mt-16">
+  <div class="max-w-content mx-auto px-6 lg:px-8 py-10 grid gap-8 md:grid-cols-4">
+    <div class="md:col-span-2">
+      <p class="font-semibold text-ink-900">AI Controls Catalog</p>
+      <p class="mt-1 text-sm text-ink-600 max-w-prose-wide">
+        The audit-ready controls library for AI systems. Practitioner-authored.
+        ISO 42001 / NIST AI RMF / EU AI Act / OWASP-mapped. Free and open under
+        CC-BY 4.0 (content) and MIT (code).
+      </p>
+    </div>
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wide text-ink-500">Browse</p>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="/controls" class="text-ink-700 hover:text-accent-700">All controls</a></li>
+        <li><a href="/frameworks" class="text-ink-700 hover:text-accent-700">Frameworks</a></li>
+        <li><a href="/lifecycle" class="text-ink-700 hover:text-accent-700">Lifecycle</a></li>
+        <li><a href="/risk-domains" class="text-ink-700 hover:text-accent-700">Risk domains</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wide text-ink-500">Project</p>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a href="/methodology" class="text-ink-700 hover:text-accent-700">Methodology</a></li>
+        <li><a href="/contribute" class="text-ink-700 hover:text-accent-700">Contribute</a></li>
+        <li><a href="/changelog" class="text-ink-700 hover:text-accent-700">Changelog</a></li>
+        <li><a href="/about" class="text-ink-700 hover:text-accent-700">About</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-ink-200">
+    <div class="max-w-content mx-auto px-6 lg:px-8 py-4 flex flex-col md:flex-row gap-2 md:items-center md:justify-between text-xs text-ink-500">
+      <span>© {year} Emmanuel Guilherme Jr. · Code MIT · Content CC-BY 4.0</span>
+      <span>
+        Part of the
+        <a href="/about" class="underline hover:text-accent-700">four-repo AI security portfolio</a>.
+      </span>
+    </div>
+  </div>
+</footer>

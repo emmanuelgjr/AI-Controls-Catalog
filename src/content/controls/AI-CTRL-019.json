@@ -1,0 +1,91 @@
+{
+  "id": "AI-CTRL-019",
+  "version": "1.0.0",
+  "title": "Agentic AI Tool Authorization Boundaries",
+  "category": "Inference & Output",
+  "control_type": "preventive",
+  "lifecycle_stage": ["Deployment", "Operation & Monitoring"],
+  "risk_domain": ["Model", "Infrastructure"],
+  "applicability": {
+    "ai_types": ["Agentic AI", "LLM", "Multi-modal"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "Banking", "Healthcare"],
+    "company_size": ["MidMarket", "Enterprise"]
+  },
+  "objective": "Restrict agentic AI systems to least-privilege tool authorizations; enforce approval boundaries for high-impact actions; log and review all tool invocations; and prevent privilege escalation across multi-step or multi-agent workflows.",
+  "rationale": "Agentic systems combine LLM behavior (susceptible to prompt injection) with tools that can take real-world action (sending email, modifying records, moving money, calling APIs). OWASP Agentic Top 10 identifies excessive agency and tool permission escalation as primary risks. Without least-privilege tool authorization and human approval boundaries for high-impact actions, a single prompt injection can cascade into material harm.",
+  "control_narrative": "For each agentic AI system, the organization defines and enforces tool authorization boundaries: an explicit allow-list of tools (no implicit access), per-tool scope (read vs. write, target systems, payload classes), per-action approval requirements based on impact (high-impact actions require human approval), and per-user-context limits (user A's agent cannot act in user B's context without authorization). Multi-step workflows enforce continuity of authorization (an authorized first action does not implicitly authorize a different subsequent action). Multi-agent systems enforce inter-agent authorization (an agent does not act on another agent's request without auditable provenance). All tool invocations are logged with input, output, decision rationale (where the model provides it), and outcome. Periodic review confirms scope creep has not occurred.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the Agentic AI standard and confirm coverage of: tool allow-list, per-tool scope, per-action approval thresholds, per-user-context limits, multi-step continuity, multi-agent provenance, logging.",
+      "Confirm definition of 'high-impact' actions and required approval authority.",
+      "Confirm periodic scope review requirement (≥ quarterly).",
+      "Confirm integration with AI-CTRL-006 (Human Oversight), AI-CTRL-008 (Logging), AI-CTRL-007 (Output Filtering)."
+    ],
+    "inquiries": [
+      "Who authorizes a new tool for an agentic system?",
+      "How is 'high-impact' defined for actions that vary by context (e.g., a tool that can read everything but only write specific records)?",
+      "How are multi-agent systems segregated when agents have different trust levels?",
+      "How are tool authorization changes propagated quickly when risk emerges?"
+    ],
+    "inspections": [
+      "Agentic AI standard.",
+      "Tool authorization registers for sampled systems.",
+      "High-impact action thresholds and approval workflow.",
+      "Quarterly scope review records."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the inventory, sample agentic AI systems in production.",
+      "For each, obtain the tool authorization register and confirm it matches the deployed configuration (inspect runtime config / IAM).",
+      "Inspect logs of high-impact actions in the audit period and confirm human approval per the standard.",
+      "Sample tool invocations and confirm logging completeness.",
+      "Inspect quarterly scope review records and confirm any scope drift was addressed.",
+      "For multi-agent systems, confirm inter-agent authorization records exist for sensitive actions.",
+      "For 1 system, attempt (in a non-production replica) to invoke a tool outside the authorization scope and confirm the attempt is denied and logged."
+    ],
+    "sample_size_guidance": {
+      "population_type": "Production agentic AI systems",
+      "low_risk": "5 systems",
+      "moderate_risk": "10 systems",
+      "high_risk": "All in-scope systems or 100% of agents with write authorities"
+    },
+    "reperformance_steps": [
+      "For 1 sampled system, independently exercise 5 attempts to invoke unauthorized tools (in a non-production replica) and confirm all are denied with appropriate logs."
+    ]
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "Agentic AI standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Tool authorization registers per sampled system", "format": "Config/CSV", "frequency": "Per sample" },
+      { "item": "High-impact action approval logs", "format": "System export", "frequency": "Per sample" },
+      { "item": "Tool invocation logs", "format": "System export", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Quarterly scope-review records", "format": "PDF/system", "frequency": "Quarterly" }
+    ],
+    "retention_period": "7 years for regulated environments; 3 years otherwise"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["8.3"],
+    "nist_ai_rmf": ["GOVERN-3.2", "MANAGE-2.2"],
+    "eu_ai_act": ["Article 14", "Article 15"],
+    "owasp_agentic_top_10": ["AAI01", "AAI02", "AAI04", "AAI05", "AAI06"],
+    "owasp_llm_top_10": ["LLM07:2025"],
+    "mitre_atlas": ["AML.T0067"]
+  },
+  "related_controls": ["AI-CTRL-003", "AI-CTRL-006", "AI-CTRL-007", "AI-CTRL-008"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "OWASP Agentic AI Top 10", "url": "https://genai.owasp.org/" },
+    { "title": "OWASP LLM07:2025 — Excessive Agency", "url": "https://genai.owasp.org/llm-top-10/" },
+    { "title": "EU AI Act Articles 14, 15", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" }
+  ]
+}

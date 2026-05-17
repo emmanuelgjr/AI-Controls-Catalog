@@ -1,0 +1,9 @@
+{
+  "slug": "iso-iec-42001",
+  "name": "ISO/IEC 42001:2023",
+  "short_name": "ISO 42001",
+  "publisher": "ISO/IEC JTC 1/SC 42",
+  "description": "Management system standard for AI: requirements for establishing, implementing, maintaining, and continually improving an AI Management System (AIMS) within an organization.",
+  "color_mark": "#0369A1",
+  "url": "https://www.iso.org/standard/81230.html"
+}

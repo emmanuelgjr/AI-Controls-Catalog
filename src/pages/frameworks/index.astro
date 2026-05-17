@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const frameworks = (await getCollection('frameworks')).map((f) => f.data);
+const controls = (await getCollection('controls')).map((c) => c.data);
+
+const counts: Record<string, number> = {};
+for (const c of controls) {
+  for (const [k, v] of Object.entries(c.framework_mappings)) {
+    if (v && (v as string[]).length > 0) counts[k] = (counts[k] ?? 0) + 1;
+  }
+}
+
+const keyMap: Record<string, string> = {
+  iso_iec_42001: 'iso-iec-42001',
+  nist_ai_rmf: 'nist-ai-rmf',
+  eu_ai_act: 'eu-ai-act',
+  owasp_llm_top_10: 'owasp-llm-top-10',
+  owasp_agentic_top_10: 'owasp-agentic-top-10',
+  owasp_dsgai: 'owasp-dsgai',
+  mitre_atlas: 'mitre-atlas',
+  soc_2: 'soc-2',
+};
+const slugCounts: Record<string, number> = {};
+for (const [k, v] of Object.entries(counts)) slugCounts[keyMap[k] ?? k] = v;
+---
+
+<BaseLayout
+  title="Frameworks — AI Controls Catalog"
+  description="Browse AI controls by framework: ISO/IEC 42001, NIST AI RMF, EU AI Act, OWASP LLM Top 10, OWASP Agentic Top 10, OWASP DSGAI, MITRE ATLAS, SOC 2."
+>
+  <section class="max-w-content mx-auto px-6 lg:px-8 py-12">
+    <p class="text-sm font-medium text-accent-700">Frameworks</p>
+    <h1 class="font-display font-semibold text-3xl md:text-4xl tracking-tight text-ink-900 mt-2">
+      Browse by framework
+    </h1>
+    <p class="mt-3 text-ink-600 max-w-prose-wide">
+      Every control maps to multiple standards and frameworks. Pick a
+      framework to see which controls contribute evidence to its requirements.
+    </p>
+
+    <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+      {frameworks.map((f) => (
+        <li>
+          <a href={`/frameworks/${f.slug}`} class="card-interactive block h-full">
+            <div class="flex items-start justify-between gap-3 mb-2">
+              <span class="inline-flex items-center gap-2">
+                <span class="inline-block w-3 h-3 rounded-full" style={`background:${f.color_mark}`}></span>
+                <span class="font-semibold text-ink-900">{f.short_name}</span>
+              </span>
+              <span class="badge-neutral whitespace-nowrap">{slugCounts[f.slug] ?? 0} controls</span>
+            </div>
+            <p class="text-sm text-ink-600 mt-1">{f.description}</p>
+            <p class="text-xs text-ink-500 mt-3">{f.publisher}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

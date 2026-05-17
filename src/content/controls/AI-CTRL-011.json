@@ -1,0 +1,91 @@
+{
+  "id": "AI-CTRL-011",
+  "version": "1.0.0",
+  "title": "Bias Testing and Fairness Validation",
+  "category": "Bias & Fairness",
+  "control_type": "detective",
+  "lifecycle_stage": ["Evaluation & Testing", "Operation & Monitoring"],
+  "risk_domain": ["Model", "Data"],
+  "applicability": {
+    "ai_types": ["LLM", "Traditional ML", "Computer Vision", "Generative AI", "Recommender"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid", "Edge"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "Banking", "Healthcare", "Public sector"],
+    "company_size": ["MidMarket", "Enterprise"]
+  },
+  "objective": "Validate performance, fairness, and disparate-impact metrics for AI systems with protected-class implications, using methods appropriate to the system type and use case, with documented findings and remediation.",
+  "rationale": "AI systems can encode bias from training data, modeling choices, deployment context, and feedback loops. Civil-rights, equal-credit, employment, and consumer-protection law all impose disparate-impact obligations. EU AI Act Article 10 requires data governance practices that examine bias; ISO/IEC 42001 clause 6.1.3 requires consideration of fairness. Without periodic fairness validation, organizations cannot demonstrate diligence to regulators or to affected individuals.",
+  "control_narrative": "For AI systems whose decisions or outputs may impact protected groups (employment, credit, housing, insurance, healthcare, content moderation, education, criminal justice, public benefits), the organization performs bias and fairness validation pre-production and at minimum annually thereafter. Validation methods are matched to system type: subgroup performance metrics (precision, recall, calibration) for classification; demographic parity and equalized odds for binary decisions; representation analysis for generative systems; refusal-rate and tone analysis for LLM responses across demographic prompts. Findings are recorded with severity, remediation plan, owner, and date. Where bias cannot be fully eliminated, residual risk is documented and accepted by an appropriately senior authority. Validation methodology and results are made available to affected-stakeholder requests where consistent with safety and legal constraints.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the Bias and Fairness standard and confirm scope criteria for in-scope systems.",
+      "Confirm validation methodology requirements by system type.",
+      "Confirm pre-production and periodic (≥ annual) requirements.",
+      "Confirm findings register requirements (severity, remediation, owner, date, residual risk acceptance).",
+      "Confirm sign-off authority for residual bias acceptance.",
+      "Confirm linkage to AI Risk Register and AIIA (AI-CTRL-005)."
+    ],
+    "inquiries": [
+      "Who is qualified to perform bias validation? What training/methodology requirements apply?",
+      "How are protected groups identified for each system, including in jurisdictions where collecting that data is itself restricted?",
+      "How is intersectional bias (multiple protected attributes) tested?",
+      "What is the threshold for 'concerning' disparity that triggers remediation?"
+    ],
+    "inspections": [
+      "Bias and Fairness standard.",
+      "Validation methodology documentation.",
+      "Sample of validation reports.",
+      "Findings register.",
+      "Residual-risk acceptance records."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the inventory, sample in-scope AI systems.",
+      "For each, confirm pre-production validation report exists and uses methods aligned to the standard.",
+      "Confirm at least annual re-validation occurred in audit period.",
+      "Inspect findings and confirm remediation actions per the register.",
+      "For residual-bias acceptance, confirm sign-off authority matches the standard.",
+      "Independently re-compute a sample subgroup metric using the documented dataset and method, and compare."
+    ],
+    "sample_size_guidance": {
+      "population_type": "In-scope AI systems with protected-class implications",
+      "low_risk": "5 systems",
+      "moderate_risk": "10 systems",
+      "high_risk": "All in-scope systems or 100% of EU AI Act high-risk"
+    },
+    "reperformance_steps": [
+      "For 1 sampled system, independently re-run the subgroup performance computation on the most-recent evaluation dataset and compare to management's report."
+    ]
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "Bias and Fairness standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Validation reports for sampled systems", "format": "PDF/Notebook", "frequency": "Per sample" },
+      { "item": "Findings register", "format": "Excel/system", "frequency": "At fieldwork" },
+      { "item": "Residual-bias acceptance records", "format": "PDF/email", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Evaluation datasets and dataset documentation", "format": "Data + datasheet", "frequency": "Per sample" }
+    ],
+    "retention_period": "Lifetime of the AI system + 7 years after retirement (regulated); + 3 years (otherwise)"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["6.1.3", "8.3"],
+    "nist_ai_rmf": ["MEASURE-2.11", "MEASURE-3.3"],
+    "eu_ai_act": ["Article 10", "Article 15"],
+    "owasp_dsgai": ["DSGAI13"]
+  },
+  "related_controls": ["AI-CTRL-002", "AI-CTRL-005", "AI-CTRL-012"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "NIST SP 1270 — Towards a Standard for Identifying and Managing Bias in AI", "url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.1270.pdf" },
+    { "title": "EU AI Act Article 10 — Data and data governance", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" },
+    { "title": "ISO/IEC TR 24027 — Bias in AI systems", "url": "https://www.iso.org/standard/77607.html" }
+  ]
+}

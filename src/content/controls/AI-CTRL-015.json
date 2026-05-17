@@ -1,0 +1,86 @@
+{
+  "id": "AI-CTRL-015",
+  "version": "1.0.0",
+  "title": "Data Retention and Deletion for AI Systems",
+  "category": "Data Governance",
+  "control_type": "preventive",
+  "lifecycle_stage": ["Operation & Monitoring", "Retirement"],
+  "risk_domain": ["Data"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Traditional ML", "Computer Vision", "Generative AI", "Multi-modal", "Recommender"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid", "Edge"],
+    "regulatory_regimes": ["GDPR", "PIPEDA", "HIPAA", "EU AI Act", "Banking", "ISO 42001"],
+    "company_size": ["SMB", "MidMarket", "Enterprise"]
+  },
+  "objective": "Define and enforce retention and deletion of AI-related data (training datasets, fine-tuning data, embeddings, prompts, completions, model artifacts, logs) per a documented schedule aligned to legal, regulatory, and operational requirements.",
+  "rationale": "AI systems create new categories of data that traditional retention schedules do not cover: embeddings of personal data, prompts containing customer content, completions reflecting model behavior, intermediate checkpoints. Each category has distinct legal and operational considerations. Failure to apply retention and deletion creates unnecessary privacy exposure, complicates DSR responses, and exceeds the data minimization principles of GDPR and similar laws.",
+  "control_narrative": "The organization maintains an AI Data Retention Schedule covering: training/fine-tuning datasets, model checkpoints and final weights, evaluation datasets, prompts and completions captured operationally, embeddings derived from organizational or personal data, conversation/session logs, and feedback (RLHF) data. The schedule specifies retention period, deletion verification method, exceptions (legal hold, regulatory required retention), and roles. Vendor-managed services have analogous configurations and contractual deletion guarantees with deletion certificates. Embeddings derived from personal data are treated as personal data and deleted when source data is erased or anonymized. Logs of deletion are themselves retained for audit.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the AI Data Retention Schedule and confirm coverage of all AI-related data categories.",
+      "Confirm schedule is aligned to applicable privacy law, sectoral retention rules, and ISO/IEC 42001 requirements.",
+      "Confirm deletion verification methods are documented (e.g., cryptographic erasure, key destruction, attestation).",
+      "Confirm vendor configurations are aligned and deletion certificates are required contractually.",
+      "Confirm exception handling (legal hold, regulatory holds) and re-evaluation cadence."
+    ],
+    "inquiries": [
+      "Who owns AI data retention?",
+      "How are embeddings of personal data handled when source data is erased?",
+      "How is deletion of training data on backup media or with third parties verified?",
+      "How are vendor deletion certificates obtained and stored?"
+    ],
+    "inspections": [
+      "AI Data Retention Schedule.",
+      "Vendor contracts with deletion guarantees.",
+      "Sample deletion records and certificates.",
+      "Configuration evidence for systems with automatic deletion."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the inventory, sample AI systems.",
+      "For each, confirm retention configuration matches the schedule for each applicable data category.",
+      "For data scheduled for deletion in the audit period, confirm deletion occurred and was verified.",
+      "Sample vendor deletion certificates and confirm receipt and storage.",
+      "For systems with embeddings of personal data, confirm process for erasure-triggered embedding deletion.",
+      "Confirm legal-hold overrides were applied appropriately and lifted when no longer required."
+    ],
+    "sample_size_guidance": {
+      "population_type": "AI systems with data due for deletion in audit period",
+      "low_risk": "5 systems",
+      "moderate_risk": "10 systems",
+      "high_risk": "25 systems or 100% of systems processing special-category data"
+    }
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "AI Data Retention Schedule", "format": "PDF/Excel", "frequency": "At fieldwork" },
+      { "item": "Deletion records for audit-period deletions", "format": "System export", "frequency": "Per sample" },
+      { "item": "Vendor deletion certificates", "format": "PDF", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Retention configuration evidence", "format": "Config screenshot", "frequency": "Per sample" },
+      { "item": "Legal-hold records affecting AI data", "format": "Legal system export", "frequency": "Per applicable case" }
+    ],
+    "retention_period": "Deletion records: 7 years for regulated environments; 3 years otherwise"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["7.4", "8.3"],
+    "nist_ai_rmf": ["MAP-4.1", "MEASURE-2.10"],
+    "eu_ai_act": ["Article 10"],
+    "owasp_dsgai": ["DSGAI16"]
+  },
+  "related_controls": ["AI-CTRL-002", "AI-CTRL-013", "AI-CTRL-018"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "GDPR Article 17 — Right to erasure", "url": "https://gdpr-info.eu/art-17-gdpr/" },
+    { "title": "ISO/IEC 42001:2023, clause 7.4", "url": "https://www.iso.org/standard/81230.html" },
+    { "title": "NIST AI RMF — MEASURE-2.10", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+  ]
+}

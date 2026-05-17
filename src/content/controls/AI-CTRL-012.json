@@ -1,0 +1,83 @@
+{
+  "id": "AI-CTRL-012",
+  "version": "1.0.0",
+  "title": "AI System Documentation and Model Cards",
+  "category": "Transparency & Explainability",
+  "control_type": "directive",
+  "lifecycle_stage": ["Deployment", "Operation & Monitoring"],
+  "risk_domain": ["Governance", "Model"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Traditional ML", "Computer Vision", "Generative AI", "Multi-modal", "Recommender"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid", "Edge", "Embedded"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "NIST AI RMF"],
+    "company_size": ["SMB", "MidMarket", "Enterprise"]
+  },
+  "objective": "Maintain current, accessible technical documentation (model cards, datasheets, system cards) for every production AI system, sufficient to enable risk-based use, regulatory review, and downstream consumer understanding.",
+  "rationale": "EU AI Act Article 11 and Annex IV require technical documentation for high-risk systems. ISO/IEC 42001 clause 7.5 and NIST AI RMF MAP-4 require traceability and transparency. Model cards (Mitchell et al.) and datasheets (Gebru et al.) are established practices that translate technical specifications into reviewable artifacts for non-specialist stakeholders.",
+  "control_narrative": "Every production AI system has a Model Card and Dataset Datasheet maintained alongside the model. Model Cards include: model details (developer, version, type, training data summary, evaluation data summary), intended use and out-of-scope use, factors (relevant demographic / environmental), metrics (performance, fairness, robustness), evaluation data, training data, quantitative analyses, ethical considerations, caveats and recommendations. Datasheets include: motivation, composition, collection process, preprocessing, uses, distribution, maintenance. Documentation is reviewed at material change and at minimum annually. For systems used by downstream business teams, a non-technical 'use card' is also published.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the AI Documentation standard and confirm required artifacts (Model Card, Datasheet, optional Use Card).",
+      "Confirm content requirements align with Annex IV of the EU AI Act for high-risk systems and with widely adopted templates (Model Cards, Datasheets).",
+      "Confirm storage location is accessible to stakeholders who need it.",
+      "Confirm refresh requirements (material change, annual minimum)."
+    ],
+    "inquiries": [
+      "Who authors and reviews Model Cards?",
+      "How is Annex IV technical documentation maintained for EU AI Act high-risk systems?",
+      "How is documentation accessibility balanced with confidentiality (e.g., for systems whose details are competitively sensitive)?"
+    ],
+    "inspections": [
+      "AI Documentation standard.",
+      "Model Card and Datasheet templates.",
+      "Sample of completed Model Cards and Datasheets.",
+      "Documentation review records."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the inventory, sample production AI systems.",
+      "For each, confirm a Model Card and Datasheet exist and are current (reviewed within the last 12 months or since last material change).",
+      "Confirm content covers required sections substantively.",
+      "For EU AI Act high-risk systems, confirm Annex IV technical documentation completeness.",
+      "Confirm the documents are accessible to the documented stakeholders.",
+      "Trace 2 metrics in the Model Card to the underlying evaluation report and confirm consistency."
+    ],
+    "sample_size_guidance": {
+      "population_type": "Production AI systems",
+      "low_risk": "5 systems",
+      "moderate_risk": "10 systems",
+      "high_risk": "25 systems or 100% of EU AI Act high-risk"
+    }
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "AI Documentation standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Model Cards for sampled systems", "format": "PDF/Markdown", "frequency": "Per sample" },
+      { "item": "Datasheets for sampled systems", "format": "PDF/Markdown", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Annex IV technical documentation for EU AI Act high-risk", "format": "PDF/Word", "frequency": "Per sample" }
+    ],
+    "retention_period": "Lifetime of the AI system + 10 years (EU AI Act high-risk); + 7 years (regulated); + 3 years (otherwise)"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["7.5", "8.4"],
+    "nist_ai_rmf": ["MAP-4.1", "MEASURE-2.8"],
+    "eu_ai_act": ["Article 11", "Annex IV"],
+    "owasp_dsgai": ["DSGAI14"]
+  },
+  "related_controls": ["AI-CTRL-002", "AI-CTRL-011", "AI-CTRL-017"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "Mitchell et al. — Model Cards for Model Reporting", "url": "https://arxiv.org/abs/1810.03993" },
+    { "title": "Gebru et al. — Datasheets for Datasets", "url": "https://arxiv.org/abs/1803.09010" },
+    { "title": "EU AI Act Annex IV — Technical documentation", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" }
+  ]
+}

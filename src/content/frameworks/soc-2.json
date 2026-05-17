@@ -1,0 +1,9 @@
+{
+  "slug": "soc-2",
+  "name": "SOC 2 / Trust Services Criteria",
+  "short_name": "SOC 2",
+  "publisher": "AICPA",
+  "description": "Trust Services Criteria covering Security, Availability, Processing Integrity, Confidentiality, and Privacy — the basis for SOC 2 examinations.",
+  "color_mark": "#166534",
+  "url": "https://www.aicpa-cima.com/"
+}

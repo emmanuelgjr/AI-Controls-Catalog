@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ControlsExplorer from '../../components/ControlsExplorer.tsx';
+import { getCollection } from 'astro:content';
+
+const controls = (await getCollection('controls')).map((c) => c.data);
+const categories = new Set(controls.map((c) => c.category));
+---
+
+<BaseLayout
+  title={`All AI Controls — AI Controls Catalog`}
+  description={`Browse ${controls.length} audit-ready AI controls across ${categories.size} categories. Filter by framework, lifecycle, AI type. Free, open, CC-BY.`}
+>
+  <section class="max-w-content mx-auto px-6 lg:px-8 py-12">
+    <div class="mb-10">
+      <p class="text-sm font-medium text-accent-700">Controls</p>
+      <h1 class="font-display font-semibold text-3xl md:text-4xl tracking-tight text-ink-900 mt-2">
+        {controls.length} audit-ready controls
+      </h1>
+      <p class="mt-3 text-ink-600 max-w-prose-wide">
+        Filter by framework, lifecycle stage, risk domain, control type, or AI
+        type. Every control includes Test of Design, Test of Operating
+        Effectiveness, evidence requirements, and references.
+      </p>
+    </div>
+
+    <ControlsExplorer client:load controls={controls} />
+  </section>
+</BaseLayout>

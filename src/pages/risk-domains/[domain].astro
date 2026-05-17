@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ControlCard from '../../components/ControlCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const domains = ['Data', 'Model', 'Infrastructure', 'Governance', 'People & Process', 'Third Party'];
+  const slugify = (s: string) =>
+    s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const controls = await getCollection('controls');
+  return domains.map((d) => ({
+    params: { domain: slugify(d) },
+    props: { domainName: d, allControls: controls.map((c) => c.data) },
+  }));
+}
+
+const { domainName, allControls } = Astro.props;
+const matches = allControls.filter((c) => c.risk_domain.includes(domainName as any));
+---
+
+<BaseLayout
+  title={`${domainName} risk — AI Controls Catalog`}
+  description={`${matches.length} AI controls addressing ${domainName} risk.`}
+>
+  <section class="max-w-content mx-auto px-6 lg:px-8 py-12">
+    <a href="/risk-domains" class="text-sm text-ink-500 hover:text-accent-700">← All risk domains</a>
+    <h1 class="font-display font-semibold text-3xl md:text-4xl tracking-tight text-ink-900 mt-3">{domainName} risk</h1>
+    <p class="mt-2 text-ink-600">{matches.length} controls address this domain.</p>
+
+    <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+      {matches.map((c) => (<li><ControlCard control={c} /></li>))}
+    </ul>
+  </section>
+</BaseLayout>

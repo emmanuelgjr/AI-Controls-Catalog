@@ -1,0 +1,50 @@
+{
+  "name": "ai-controls-catalog",
+  "version": "0.1.0",
+  "description": "The audit-ready controls library for AI systems.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "validate": "tsx scripts/validate-content.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint . --ext .ts,.tsx,.astro",
+    "format": "prettier --write \"src/**/*.{ts,tsx,astro,md,json}\"",
+    "typecheck": "astro check && tsc --noEmit"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^3.1.9",
+    "@astrojs/react": "^3.6.3",
+    "@astrojs/sitemap": "3.1.6",
+    "@astrojs/tailwind": "^5.1.3",
+    "astro": "^4.16.0",
+    "docx": "^9.0.0",
+    "exceljs": "^4.4.0",
+    "fuse.js": "^7.0.0",
+    "jspdf": "^2.5.2",
+    "lucide-react": "^0.453.0",
+    "papaparse": "^5.4.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "shiki": "^1.22.0",
+    "tailwindcss": "^3.4.13",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.9",
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/node": "^22.7.5",
+    "@types/papaparse": "^5.3.14",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "fake-indexeddb": "^6.0.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.2"
+  }
+}

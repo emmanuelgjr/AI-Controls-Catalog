@@ -1,0 +1,86 @@
+{
+  "id": "AI-CTRL-016",
+  "version": "1.0.0",
+  "title": "AI Acceptable Use Policy and User Training",
+  "category": "Governance",
+  "control_type": "directive",
+  "lifecycle_stage": ["Strategy & Planning", "Operation & Monitoring"],
+  "risk_domain": ["People & Process", "Governance"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Generative AI", "Multi-modal", "Traditional ML"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "Banking", "Healthcare", "Public sector"],
+    "company_size": ["SMB", "MidMarket", "Enterprise"]
+  },
+  "objective": "Maintain a published, enforceable AI Acceptable Use Policy and deliver role-appropriate AI literacy training to employees, contractors, and other authorized users.",
+  "rationale": "EU AI Act Article 4 requires deployers to ensure AI literacy among staff. Most AI-related incidents in regulated enterprises involve employee actions (sensitive data pasted into consumer AI, over-reliance on hallucinated outputs, unauthorized tool installation). A documented policy plus actual training (not a once-a-year click-through) materially reduces likelihood and is a control that auditors and regulators specifically examine.",
+  "control_narrative": "The organization publishes an AI Acceptable Use Policy covering: sanctioned-tool list with categories of permitted use, prohibited categories of data in any AI service, approved-use-case process, exception/risk-acceptance process, monitoring disclosure, escalation, and consequences for non-compliance. AI literacy training is required at onboarding and refreshed annually for all knowledge workers, with role-targeted modules for: engineers (secure coding with AI assistants), product/business (use-case intake), legal/compliance (AI in legal review), HR (AI in talent processes), and managers (responsible team adoption). Completion is tracked. Policy and training reference the AI System Inventory (AI-CTRL-001) and the Shadow AI Detection control (AI-CTRL-020).",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the AI Acceptable Use Policy and confirm coverage of required sections.",
+      "Confirm policy approval, publication, and accessibility to all employees.",
+      "Confirm AI literacy training exists with role-targeted modules.",
+      "Confirm training is required at onboarding and refreshed annually with tracking.",
+      "Confirm policy and training reference the approved-tool list and exception process."
+    ],
+    "inquiries": [
+      "Who owns the AI AUP?",
+      "How is the sanctioned-tool list kept current?",
+      "How is training role-appropriate without being burdensome?",
+      "How is contractor training handled?"
+    ],
+    "inspections": [
+      "AI Acceptable Use Policy.",
+      "Training curricula by role.",
+      "Sample of training completion records.",
+      "Policy attestation records (if applicable)."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "Confirm the current policy is published and accessible.",
+      "Sample employees and confirm onboarding training completion within the documented window.",
+      "Sample employees and confirm annual refresh completion.",
+      "Confirm completion rate aggregate metrics meet documented threshold.",
+      "Inspect a sample of policy updates and confirm proper review and republication.",
+      "For sampled exception requests, confirm process per policy."
+    ],
+    "sample_size_guidance": {
+      "population_type": "Employees in role-categories requiring training",
+      "low_risk": "25 employees",
+      "moderate_risk": "60 employees",
+      "high_risk": "150 employees or 100% of high-risk roles"
+    }
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "AI Acceptable Use Policy (current version)", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Training curricula by role", "format": "PDF / LMS export", "frequency": "At fieldwork" },
+      { "item": "Training completion records for sampled employees", "format": "LMS export", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Policy version history", "format": "Document/repo", "frequency": "At fieldwork" },
+      { "item": "Sanctioned-tool list with last-updated date", "format": "Wiki/portal export", "frequency": "At fieldwork" }
+    ],
+    "retention_period": "7 years for regulated environments; 3 years otherwise"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["5.2", "7.3"],
+    "nist_ai_rmf": ["GOVERN-3.1", "GOVERN-4.1"],
+    "eu_ai_act": ["Article 4"],
+    "owasp_dsgai": ["DSGAI17"]
+  },
+  "related_controls": ["AI-CTRL-001", "AI-CTRL-020"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "EU AI Act Article 4 — AI Literacy", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" },
+    { "title": "ISO/IEC 42001:2023, clause 7.3 — Awareness", "url": "https://www.iso.org/standard/81230.html" },
+    { "title": "NIST AI RMF — GOVERN-3 AI Workforce", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+  ]
+}

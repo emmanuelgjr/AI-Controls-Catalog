@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contribute — AI Controls Catalog"
+  description="How to propose new controls, edits, mappings, or evidence patterns to the AI Controls Catalog."
+>
+  <section class="max-w-content mx-auto px-6 lg:px-8 py-12">
+    <p class="text-sm font-medium text-accent-700">Contribute</p>
+    <h1 class="font-display font-semibold text-3xl md:text-4xl tracking-tight text-ink-900 mt-2">Contribute a control or improvement</h1>
+
+    <div class="prose prose-lg max-w-prose-wide mt-8">
+      <p>
+        Contributions are welcome — especially from auditors, AI governance
+        leads, CISOs, and regulators with field experience. The contribution
+        model favors quality over quantity: a single control authored to the
+        catalog's quality bar beats ten thin entries.
+      </p>
+
+      <h2>Ways to contribute</h2>
+      <ol>
+        <li><strong>Propose a new control</strong> — open an issue with the proposed scope, then submit a PR with a JSON file matching the schema.</li>
+        <li><strong>Improve an existing control</strong> — open a PR editing the relevant JSON. Edits trigger a version bump and changelog entry.</li>
+        <li><strong>Add framework mappings</strong> — particularly for SOC 2, MITRE ATLAS, OSFI E-21, and NYDFS 500, which are growing through community contribution.</li>
+        <li><strong>Report a mapping issue</strong> — open an issue with the source citation. Framework references evolve; corrections are valued.</li>
+      </ol>
+
+      <h2>Quality bar</h2>
+      <p>A control is ready when:</p>
+      <ul>
+        <li>All schema fields are populated — no nulls or TODOs.</li>
+        <li>Test of Design has ≥ 3 procedures, inquiries, and inspections.</li>
+        <li>Test of Operating Effectiveness has ≥ 3 procedures and explicit sample-size guidance.</li>
+        <li>≥ 3 framework mappings with valid references.</li>
+        <li>Evidence requirements include format and retention.</li>
+        <li>≥ 2 authoritative references.</li>
+        <li>Changelog has an initial entry dated today.</li>
+      </ul>
+
+      <h2>Attribution</h2>
+      <p>
+        Contributors are added to <code>CONTRIBUTORS.md</code>. For substantive
+        content contributions, the contributor's name appears alongside
+        Emmanuel's in the <code>author</code> or <code>reviewed_by</code>
+        field on the affected control(s). Substantive contributors (≥ 3
+        merged content PRs) are listed on the About page.
+      </p>
+
+      <h2>Submitting</h2>
+      <p>
+        Open a PR at
+        <a href="https://github.com/emmanuelgjr/AI-Controls-Catalog">github.com/emmanuelgjr/AI-Controls-Catalog</a>.
+        For substantive proposals, please open an issue first so the scope
+        and approach can be discussed before you invest time.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

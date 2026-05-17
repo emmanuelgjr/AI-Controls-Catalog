@@ -1,0 +1,90 @@
+{
+  "id": "AI-CTRL-013",
+  "version": "1.0.0",
+  "title": "Personal Data Minimization in Training and Inference",
+  "category": "Privacy",
+  "control_type": "preventive",
+  "lifecycle_stage": ["Data Sourcing & Preparation", "Training", "Deployment", "Operation & Monitoring"],
+  "risk_domain": ["Data"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Traditional ML", "Computer Vision", "Generative AI", "Recommender"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid", "Edge"],
+    "regulatory_regimes": ["GDPR", "PIPEDA", "HIPAA", "EU AI Act", "State privacy laws"],
+    "company_size": ["SMB", "MidMarket", "Enterprise"]
+  },
+  "objective": "Ensure that personal data used in training, fine-tuning, evaluation, and inference is minimized to the data strictly necessary for the stated purpose, processed under a defensible lawful basis, and subject to the rights of affected individuals.",
+  "rationale": "Privacy regulators worldwide apply data-minimization principles (GDPR Article 5(1)(c), PIPEDA Schedule 1 §4.4, HIPAA Privacy Rule). Training and inference both involve personal data: training datasets, fine-tuning examples, RLHF feedback, conversation logs used for improvement, RAG retrieval over personal-data corpora, embeddings derived from personal data. Without minimization, organizations create unnecessary privacy exposure, complicate data-subject-rights responses, and violate principles regulators are actively examining.",
+  "control_narrative": "For every AI system processing personal data, the organization documents the lawful basis, identifies the minimum data categories required, applies pseudonymization or de-identification where possible, restricts retention of inference data (prompts, completions, embeddings) to the minimum necessary, and supports data-subject rights (access, erasure, rectification, restriction). For training datasets, personal data is reviewed for minimization at curation; for inference, prompts and completions are not retained beyond operational necessity unless an explicit, lawful, documented purpose applies. Default settings on SaaS AI vendors are configured to opt out of training-on-customer-data. The control integrates with the organization's broader privacy program (DPIA, ROPA, DSR workflow).",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the AI Personal Data standard and confirm scope, minimization principles, and integration with the broader privacy program.",
+      "Confirm requirement to document lawful basis per AI system and per data category.",
+      "Confirm requirement to opt out of vendor training-on-customer-data by default.",
+      "Confirm retention defaults for prompts, completions, and embeddings.",
+      "Confirm support for data-subject rights including erasure where applicable to training data and embeddings."
+    ],
+    "inquiries": [
+      "How is the minimum-necessary determination made and documented?",
+      "How are erasure requests handled for data embedded in trained models (i.e., when retraining is impractical)?",
+      "How are vendor defaults verified and re-verified periodically?",
+      "How is personal data identified in unstructured RAG sources?"
+    ],
+    "inspections": [
+      "AI Personal Data standard.",
+      "DPIAs / Privacy Impact Assessments for sampled systems.",
+      "Vendor configuration evidence (opt-out of training-on-customer-data).",
+      "Retention configuration evidence."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the inventory, sample AI systems processing personal data.",
+      "For each, confirm a current DPIA exists, lawful basis is documented, and minimization rationale is recorded.",
+      "Confirm SaaS vendors are configured to opt out of training-on-customer-data (capture configuration evidence).",
+      "Confirm retention configuration matches the documented standard.",
+      "For sampled data-subject-rights requests involving AI systems, confirm requests were handled per the documented workflow including retraining/un-embedding where applicable.",
+      "Sample inference logs and confirm content retention does not exceed the documented period."
+    ],
+    "sample_size_guidance": {
+      "population_type": "AI systems processing personal data",
+      "low_risk": "5 systems",
+      "moderate_risk": "10 systems",
+      "high_risk": "25 systems or 100% of systems processing special-category data"
+    },
+    "reperformance_steps": [
+      "For 1 sampled vendor, independently log into the admin console and confirm the opt-out toggle is enabled."
+    ]
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "AI Personal Data standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "DPIAs for sampled systems", "format": "PDF/Word", "frequency": "Per sample" },
+      { "item": "Vendor opt-out configuration evidence", "format": "Screenshot / config export", "frequency": "Per sample" },
+      { "item": "Retention configuration evidence", "format": "Config screenshot", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Data-subject-rights handling records involving AI systems", "format": "Ticket export", "frequency": "Per sample" }
+    ],
+    "retention_period": "Lifetime of system + per applicable privacy law (typically 6 years post-relationship for GDPR-context)"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["7.4", "8.3"],
+    "nist_ai_rmf": ["MAP-4.1", "MEASURE-2.10"],
+    "eu_ai_act": ["Article 10"],
+    "owasp_llm_top_10": ["LLM06:2025"],
+    "owasp_dsgai": ["DSGAI04", "DSGAI15"]
+  },
+  "related_controls": ["AI-CTRL-002", "AI-CTRL-007", "AI-CTRL-015"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "GDPR Article 5 — Principles relating to processing of personal data", "url": "https://gdpr-info.eu/art-5-gdpr/" },
+    { "title": "EDPB Opinion 28/2024 — AI models and personal data", "url": "https://edpb.europa.eu/" },
+    { "title": "OWASP GenAI Data Security 2026 — Personal data minimization", "url": "https://genai.owasp.org/" }
+  ]
+}

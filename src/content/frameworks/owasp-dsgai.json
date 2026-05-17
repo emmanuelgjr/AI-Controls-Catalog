@@ -1,0 +1,9 @@
+{
+  "slug": "owasp-dsgai",
+  "name": "OWASP GenAI Data Security Risks and Mitigations 2026",
+  "short_name": "OWASP DSGAI",
+  "publisher": "OWASP GenAI Security Project — Data Security Initiative",
+  "description": "Catalog of data-security risks across the GenAI lifecycle (DSGAI01–DSGAI21) with mitigations, authored by the Data Security Initiative of the OWASP GenAI Security Project.",
+  "color_mark": "#9333EA",
+  "url": "https://genai.owasp.org/"
+}

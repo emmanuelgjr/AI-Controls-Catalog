@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  framework: string;
+  reference?: string;
+}
+
+const { framework, reference } = Astro.props;
+const frameworks = await getCollection('frameworks');
+const slugMap: Record<string, string> = {
+  iso_iec_42001: 'iso-iec-42001',
+  nist_ai_rmf: 'nist-ai-rmf',
+  eu_ai_act: 'eu-ai-act',
+  owasp_llm_top_10: 'owasp-llm-top-10',
+  owasp_agentic_top_10: 'owasp-agentic-top-10',
+  owasp_dsgai: 'owasp-dsgai',
+  soc_2: 'soc-2',
+  mitre_atlas: 'mitre-atlas',
+};
+const slug = slugMap[framework] ?? framework;
+const meta = frameworks.find((f) => f.data.slug === slug);
+const label = meta?.data.short_name ?? framework;
+const color = meta?.data.color_mark ?? '#475569';
+---
+
+<span
+  class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-medium bg-ink-50 text-ink-800 ring-1 ring-inset ring-ink-200"
+  title={meta?.data.name ?? framework}
+>
+  <span class="inline-block w-2 h-2 rounded-full" style={`background-color:${color}`}></span>
+  <span>{label}</span>
+  {reference && <span class="text-ink-500 font-mono text-[10px]">· {reference}</span>}
+</span>

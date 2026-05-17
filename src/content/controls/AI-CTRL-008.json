@@ -1,0 +1,88 @@
+{
+  "id": "AI-CTRL-008",
+  "version": "1.0.0",
+  "title": "AI System Logging and Monitoring",
+  "category": "Logging & Monitoring",
+  "control_type": "detective",
+  "lifecycle_stage": ["Deployment", "Operation & Monitoring"],
+  "risk_domain": ["Infrastructure", "Model"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Traditional ML", "Computer Vision", "Generative AI", "Multi-modal"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid", "Edge"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "NIST AI RMF", "Banking", "Healthcare"],
+    "company_size": ["MidMarket", "Enterprise"]
+  },
+  "objective": "Ensure that AI systems produce logs sufficient to detect abuse, investigate incidents, demonstrate compliance, and reconstruct decisions, with logs protected from tampering and retained per regulatory requirements.",
+  "rationale": "EU AI Act Article 12 mandates automatic logging for high-risk systems. ISO/IEC 42001 clause 8.4 and NIST AI RMF MANAGE-4 require traceability and explainability sufficient to support after-the-fact review. Without sufficient logging, abuse detection (prompt injection, agent misuse, data exfiltration), incident investigation, and contestability of decisions are impossible.",
+  "control_narrative": "Each AI system within scope generates logs covering: invocation metadata (timestamp, user, session, source IP / device, model version, prompt token count, completion token count, tool calls, retrieved sources for RAG, latency), authentication and authorization events, configuration changes, prompt and completion fingerprints (or full content where lawful and necessary, with separate access controls), policy/guardrail events (block/warn/allow with rule ID), and tool/agent action records. Logs are forwarded to the central SIEM, time-synchronized, tamper-protected, and retained per the data classification (minimum 1 year operational; 7 years for regulated). Sensitive content in logs is access-controlled separately from operational metadata. Detection rules covering prompt injection signals, anomalous tool use, and known abuse patterns are deployed.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the AI Logging standard and confirm coverage of required event categories.",
+      "Confirm log retention is specified by data classification and regulatory regime.",
+      "Confirm tamper protection (write-once, integrity hashing) and access controls on sensitive log content.",
+      "Confirm forwarding to central SIEM with time synchronization.",
+      "Confirm detection rule coverage for known AI abuse patterns (prompt injection, anomalous tool use, sensitive-data egress)."
+    ],
+    "inquiries": [
+      "Who owns AI logging design?",
+      "How is sensitive content in logs (e.g., user prompts containing PII) handled?",
+      "How are logs from third-party AI services (SaaS) ingested?",
+      "What is the detection content development cadence?"
+    ],
+    "inspections": [
+      "AI Logging standard.",
+      "Log schemas for sampled systems.",
+      "SIEM ingestion confirmation.",
+      "Detection rule inventory."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the inventory, sample production AI systems.",
+      "For each, inspect log samples and confirm presence of required event categories.",
+      "Confirm log retention configuration matches the data classification.",
+      "Test integrity protection by confirming write-once or hash-chain implementation.",
+      "Confirm detection rules are active in the SIEM and have fired (or are tuned reasonably for FPs) in the audit period.",
+      "Trace 3 logged events through to SIEM ingestion and confirm time synchronization."
+    ],
+    "sample_size_guidance": {
+      "population_type": "Production AI systems",
+      "low_risk": "5 systems × 1-day log sample",
+      "moderate_risk": "10 systems × 1-day log sample",
+      "high_risk": "25 systems or 100% of EU AI Act high-risk × 7-day log sample"
+    }
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "AI Logging standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Log schemas / field dictionaries per sampled system", "format": "PDF/CSV", "frequency": "Per sample" },
+      { "item": "Log samples", "format": "Log export", "frequency": "Per sample" },
+      { "item": "SIEM detection rule inventory", "format": "System export", "frequency": "At fieldwork" }
+    ],
+    "supporting": [
+      { "item": "Integrity / tamper-protection configuration", "format": "Config screenshot", "frequency": "At fieldwork" }
+    ],
+    "retention_period": "Minimum 1 year operational; 7 years for regulated content; 10 years for EU AI Act high-risk"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["8.4", "9.1"],
+    "nist_ai_rmf": ["MANAGE-4.1", "MANAGE-4.2", "MEASURE-2.6"],
+    "eu_ai_act": ["Article 12", "Article 19"],
+    "owasp_llm_top_10": ["LLM10:2025"],
+    "soc_2": ["CC7.2"],
+    "nist_csf": ["DE.CM-1", "DE.CM-7"]
+  },
+  "related_controls": ["AI-CTRL-003", "AI-CTRL-009", "AI-CTRL-020"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "EU AI Act Article 12 — Record-Keeping", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" },
+    { "title": "ISO/IEC 42001:2023, clause 8.4", "url": "https://www.iso.org/standard/81230.html" },
+    { "title": "NIST AI RMF — MANAGE-4 Continuous Monitoring", "url": "https://www.nist.gov/itl/ai-risk-management-framework" }
+  ]
+}

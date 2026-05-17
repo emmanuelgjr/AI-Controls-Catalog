@@ -1,0 +1,88 @@
+{
+  "id": "AI-CTRL-014",
+  "version": "1.0.0",
+  "title": "Adversarial Robustness Testing for Predictive ML and Computer Vision",
+  "category": "Security & Adversarial Robustness",
+  "control_type": "detective",
+  "lifecycle_stage": ["Evaluation & Testing", "Operation & Monitoring"],
+  "risk_domain": ["Model"],
+  "applicability": {
+    "ai_types": ["Traditional ML", "Computer Vision", "Recommender", "Speech"],
+    "deployment_models": ["Self-hosted", "Hybrid", "Edge", "Embedded"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "NIST AI RMF", "Banking", "Healthcare", "Public sector"],
+    "company_size": ["MidMarket", "Enterprise"]
+  },
+  "objective": "Validate that production predictive ML, computer-vision, recommender, and speech models have been tested against evasion attacks, model-extraction attacks, membership-inference attacks, data-poisoning detection, and (for vision) physical-world perturbations, with documented findings and remediation.",
+  "rationale": "Companion control to AI-CTRL-003 (which addresses LLM-specific adversarial testing). Predictive ML, computer-vision, recommender, and speech models face different attack surfaces: evasion (adversarial examples), extraction (querying for surrogate models), membership inference (privacy attack), and poisoning. ISO/IEC 42001 clause 9.1 and EU AI Act Article 15 require robustness testing appropriate to the system type. Without dedicated testing using methods appropriate to the model class, robustness claims are unverified.",
+  "control_narrative": "Each in-scope predictive ML, CV, recommender, or speech system in production undergoes adversarial robustness testing pre-production, on material change, and at least annually. Testing scope is tailored to system type: for CV — adversarial perturbations (FGSM, PGD), physical-world perturbations where applicable (printable adversarial patches, lighting/distance variation); for predictive ML — evasion robustness on protected-feature manipulations and label-noise/distribution-shift robustness; for recommender systems — manipulation robustness (review/click bombing); for speech — adversarial audio. For all classes — model-extraction and membership-inference resistance is evaluated under realistic query budgets. Findings flow to the standard findings register with severity, remediation owner, target date, and re-test verification.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the Adversarial Testing standard and confirm separate scope for non-LLM AI types complementing AI-CTRL-003.",
+      "Confirm test-method requirements by system type (CV, predictive ML, recommender, speech).",
+      "Confirm milestones (pre-production, material change, ≥ annual).",
+      "Confirm physical-world testing scope for safety-relevant CV systems (e.g., autonomous, medical imaging).",
+      "Confirm linkage to AI-CTRL-003 to avoid scope gaps and overlaps."
+    ],
+    "inquiries": [
+      "Who selects appropriate attack methods for each system type?",
+      "How is realistic query budget determined for extraction / membership inference testing?",
+      "How are CV physical-world tests conducted ethically and safely?",
+      "How is the test corpus refreshed as new attack research emerges?"
+    ],
+    "inspections": [
+      "Adversarial Testing standard (non-LLM scope).",
+      "Approved attack-method catalogs by system type.",
+      "Sample test reports.",
+      "Findings register."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the inventory, sample in-scope production systems by type.",
+      "Confirm pre-production test occurred prior to deployment, material-change tests for each change in period, and at least annual test in period.",
+      "Inspect test reports and confirm methods used match the standard's requirements for the system type.",
+      "Confirm findings are tracked with severity, owner, target date, re-test.",
+      "Re-perform 1 test method on a non-production replica and compare results."
+    ],
+    "sample_size_guidance": {
+      "population_type": "In-scope non-LLM production AI systems",
+      "low_risk": "5 systems × 1 cycle",
+      "moderate_risk": "10 systems × 2 cycles",
+      "high_risk": "All in-scope systems × all cycles, or 100% of safety-critical CV systems"
+    },
+    "reperformance_steps": [
+      "For 1 sampled CV system, independently execute a PGD adversarial attack on the documented evaluation set and compare success rate to management's report."
+    ]
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "Adversarial Testing standard (non-LLM)", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Test reports for sampled systems", "format": "PDF/Notebook", "frequency": "Per sample" },
+      { "item": "Findings register", "format": "Excel/system", "frequency": "At fieldwork" },
+      { "item": "Re-test evidence for closed findings", "format": "Logs / report", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Attack-method catalogs", "format": "PDF/repo", "frequency": "Annual" }
+    ],
+    "retention_period": "7 years for regulated environments; 3 years otherwise"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["8.3", "9.1", "9.2"],
+    "nist_ai_rmf": ["MEASURE-2.7", "MEASURE-2.8"],
+    "eu_ai_act": ["Article 15"],
+    "mitre_atlas": ["AML.T0015", "AML.T0024", "AML.T0044"]
+  },
+  "related_controls": ["AI-CTRL-003", "AI-CTRL-010", "AI-CTRL-017"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "NIST AI 100-2e2023 — Adversarial Machine Learning", "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-2e2023.pdf" },
+    { "title": "MITRE ATLAS", "url": "https://atlas.mitre.org/" },
+    { "title": "EU AI Act Article 15", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" }
+  ]
+}

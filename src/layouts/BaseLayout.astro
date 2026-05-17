@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+import SEOHead from '../components/SEOHead.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  structuredData?: Record<string, unknown>;
+}
+
+const { title, description, canonical, ogType = 'website', ogImage, structuredData } = Astro.props;
+const fullCanonical = canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SEOHead
+      title={title}
+      description={description}
+      canonical={fullCanonical}
+      ogType={ogType}
+      ogImage={ogImage}
+      structuredData={structuredData}
+    />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a href="#main" class="skip-to-content">Skip to main content</a>
+    <Nav />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,272 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FrameworkBadge from '../../components/FrameworkBadge.astro';
+import ExportButtons from '../../components/ExportButtons.tsx';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const controls = await getCollection('controls');
+  return controls.map((c) => ({
+    params: { id: c.data.id },
+    props: { control: c.data, all: controls.map((x) => x.data) },
+  }));
+}
+
+const { control, all } = Astro.props;
+const related = all.filter((c) => control.related_controls.includes(c.id));
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: `${control.title} (${control.id})`,
+  description: control.objective,
+  datePublished: control.created,
+  dateModified: control.last_reviewed,
+  inLanguage: 'en',
+  license: 'https://creativecommons.org/licenses/by/4.0/',
+  author: {
+    '@type': 'Person',
+    name: control.author,
+    url: 'https://github.com/emmanuelgjr',
+  },
+  citation: control.references.map((r) => r.title),
+  keywords: `AI audit, ${control.category}`,
+};
+
+const fm = control.framework_mappings;
+const frameworkEntries = Object.entries(fm).filter(
+  ([, v]) => v && (v as string[]).length > 0,
+) as [string, string[]][];
+---
+
+<BaseLayout
+  title={`${control.title} (${control.id}) — AI Controls Catalog`}
+  description={control.objective.slice(0, 160)}
+  ogType="article"
+  structuredData={structuredData}
+>
+  <article class="max-w-content mx-auto px-6 lg:px-8 py-12">
+    <div class="mb-2">
+      <a href="/controls" class="text-sm text-ink-500 hover:text-accent-700">← All controls</a>
+    </div>
+
+    <header class="border-b border-ink-200 pb-8 mb-8">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="font-mono text-sm text-ink-500">{control.id}</span>
+        <span class="badge-accent">{control.category}</span>
+        <span class="badge-neutral">{control.control_type}</span>
+        <span class="text-sm text-ink-500">v{control.version}</span>
+      </div>
+      <h1 class="font-display font-semibold text-3xl md:text-4xl tracking-tight text-ink-900">
+        {control.title}
+      </h1>
+      <p class="mt-3 text-sm text-ink-500">
+        Authored by {control.author} · Last reviewed {control.last_reviewed}
+      </p>
+    </header>
+
+    <div class="lg:grid lg:grid-cols-[1fr_320px] lg:gap-12">
+      <div class="prose prose-lg max-w-prose-wide">
+        <section>
+          <h2>Objective</h2>
+          <p>{control.objective}</p>
+        </section>
+
+        <section>
+          <h2>Applicability</h2>
+          <dl class="not-prose grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
+            <div>
+              <dt class="font-medium text-ink-500">AI types</dt>
+              <dd class="mt-1 text-ink-800">{control.applicability.ai_types.join(', ')}</dd>
+            </div>
+            <div>
+              <dt class="font-medium text-ink-500">Deployment models</dt>
+              <dd class="mt-1 text-ink-800">{control.applicability.deployment_models.join(', ')}</dd>
+            </div>
+            <div>
+              <dt class="font-medium text-ink-500">Lifecycle stages</dt>
+              <dd class="mt-1 text-ink-800">{control.lifecycle_stage.join(', ')}</dd>
+            </div>
+            <div>
+              <dt class="font-medium text-ink-500">Risk domains</dt>
+              <dd class="mt-1 text-ink-800">{control.risk_domain.join(', ')}</dd>
+            </div>
+            <div>
+              <dt class="font-medium text-ink-500">Regulatory regimes</dt>
+              <dd class="mt-1 text-ink-800">{control.applicability.regulatory_regimes.join(', ')}</dd>
+            </div>
+            <div>
+              <dt class="font-medium text-ink-500">Company size</dt>
+              <dd class="mt-1 text-ink-800">{control.applicability.company_size.join(', ')}</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section>
+          <h2>Rationale</h2>
+          <p>{control.rationale}</p>
+        </section>
+
+        <section>
+          <h2>Control narrative</h2>
+          <p>{control.control_narrative}</p>
+        </section>
+
+        <section>
+          <h2>Test of Design</h2>
+          <h3>Procedures</h3>
+          <ol>
+            {control.test_of_design.procedures.map((p) => <li>{p}</li>)}
+          </ol>
+          <h3>Inquiries</h3>
+          <ul>
+            {control.test_of_design.inquiries.map((p) => <li>{p}</li>)}
+          </ul>
+          <h3>Inspections</h3>
+          <ul>
+            {control.test_of_design.inspections.map((p) => <li>{p}</li>)}
+          </ul>
+        </section>
+
+        <section>
+          <h2>Test of Operating Effectiveness</h2>
+          <h3>Procedures</h3>
+          <ol>
+            {control.test_of_operating_effectiveness.procedures.map((p) => <li>{p}</li>)}
+          </ol>
+          <h3>Sample-size guidance</h3>
+          <table class="not-prose w-full text-sm border-collapse">
+            <tbody class="divide-y divide-ink-100">
+              <tr>
+                <th class="text-left py-2 pr-4 font-medium text-ink-500 w-40">Population</th>
+                <td class="py-2">{control.test_of_operating_effectiveness.sample_size_guidance.population_type}</td>
+              </tr>
+              <tr>
+                <th class="text-left py-2 pr-4 font-medium text-ink-500">Low risk</th>
+                <td class="py-2">{control.test_of_operating_effectiveness.sample_size_guidance.low_risk}</td>
+              </tr>
+              <tr>
+                <th class="text-left py-2 pr-4 font-medium text-ink-500">Moderate risk</th>
+                <td class="py-2">{control.test_of_operating_effectiveness.sample_size_guidance.moderate_risk}</td>
+              </tr>
+              <tr>
+                <th class="text-left py-2 pr-4 font-medium text-ink-500">High risk</th>
+                <td class="py-2">{control.test_of_operating_effectiveness.sample_size_guidance.high_risk}</td>
+              </tr>
+            </tbody>
+          </table>
+          {control.test_of_operating_effectiveness.reperformance_steps && (
+            <>
+              <h3>Reperformance</h3>
+              <ul>
+                {control.test_of_operating_effectiveness.reperformance_steps.map((p) => <li>{p}</li>)}
+              </ul>
+            </>
+          )}
+        </section>
+
+        <section>
+          <h2>Evidence requirements</h2>
+          <h3>Required</h3>
+          <ul class="not-prose space-y-1.5 text-sm">
+            {control.evidence_requirements.required.map((e) => (
+              <li class="flex flex-wrap gap-x-3">
+                <span class="text-ink-900 font-medium">{e.item}</span>
+                <span class="text-ink-500">{e.format}</span>
+                <span class="text-ink-500">· {e.frequency}</span>
+              </li>
+            ))}
+          </ul>
+          {control.evidence_requirements.supporting.length > 0 && (
+            <>
+              <h3>Supporting</h3>
+              <ul class="not-prose space-y-1.5 text-sm">
+                {control.evidence_requirements.supporting.map((e) => (
+                  <li class="flex flex-wrap gap-x-3">
+                    <span class="text-ink-900 font-medium">{e.item}</span>
+                    <span class="text-ink-500">{e.format}</span>
+                    <span class="text-ink-500">· {e.frequency}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          <p class="text-sm text-ink-500 mt-3"><strong>Retention:</strong> {control.evidence_requirements.retention_period}</p>
+        </section>
+
+        <section>
+          <h2>Framework mappings</h2>
+          <table class="not-prose w-full text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-ink-200">
+                <th class="text-left py-2 pr-4 font-medium text-ink-500">Framework</th>
+                <th class="text-left py-2 font-medium text-ink-500">References</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-ink-100">
+              {frameworkEntries.map(([k, refs]) => (
+                <tr>
+                  <td class="py-2 pr-4"><FrameworkBadge framework={k} /></td>
+                  <td class="py-2 font-mono text-xs">{refs.join(', ')}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+
+        {related.length > 0 && (
+          <section>
+            <h2>Related controls</h2>
+            <ul class="not-prose grid sm:grid-cols-2 gap-3">
+              {related.map((r) => (
+                <li>
+                  <a href={`/controls/${r.id}`} class="block border border-ink-200 rounded-md p-3 hover:border-accent-300 hover:bg-accent-50/30 transition-colors">
+                    <p class="font-mono text-xs text-ink-500">{r.id}</p>
+                    <p class="font-medium text-ink-900 text-sm mt-0.5">{r.title}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <section>
+          <details>
+            <summary class="cursor-pointer text-ink-700 font-medium">Changelog</summary>
+            <ul class="mt-2 text-sm">
+              {control.changelog.map((e) => (
+                <li><strong>v{e.version}</strong> · {e.date} · {e.change}</li>
+              ))}
+            </ul>
+          </details>
+        </section>
+
+        <section>
+          <h2>References</h2>
+          <ul class="text-sm">
+            {control.references.map((r) => (
+              <li><a href={r.url} target="_blank" rel="noopener noreferrer">{r.title}</a></li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <aside class="lg:sticky lg:top-20 lg:self-start mt-12 lg:mt-0 space-y-4">
+        <div class="card">
+          <h3 class="text-sm font-semibold text-ink-900 mb-3">Export this control</h3>
+          <ExportButtons client:load control={control} />
+        </div>
+        <div class="card">
+          <h3 class="text-sm font-semibold text-ink-900 mb-2">Contribute</h3>
+          <p class="text-xs text-ink-600">Spot an issue? Open a PR or issue on GitHub.</p>
+          <a
+            href={`https://github.com/emmanuelgjr/AI-Controls-Catalog/edit/main/src/content/controls/${control.id}.json`}
+            class="btn btn-secondary btn-sm w-full mt-3"
+          >
+            Suggest edit
+          </a>
+        </div>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,9 @@
+{
+  "slug": "nist-ai-rmf",
+  "name": "NIST AI Risk Management Framework 1.0",
+  "short_name": "NIST AI RMF",
+  "publisher": "U.S. National Institute of Standards and Technology",
+  "description": "Voluntary framework structured around four functions (GOVERN, MAP, MEASURE, MANAGE) to manage risks of AI systems across the lifecycle.",
+  "color_mark": "#4338CA",
+  "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+}

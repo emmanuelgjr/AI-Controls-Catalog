@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const controls = (await getCollection('controls')).map((c) => c.data);
+const entries = controls.flatMap((c) =>
+  c.changelog.map((e) => ({
+    id: c.id,
+    title: c.title,
+    version: e.version,
+    date: e.date,
+    change: e.change,
+  })),
+);
+entries.sort((a, b) => (a.date < b.date ? 1 : -1));
+---
+
+<BaseLayout
+  title="Changelog — AI Controls Catalog"
+  description="Per-control version history for the AI Controls Catalog."
+>
+  <section class="max-w-content mx-auto px-6 lg:px-8 py-12">
+    <p class="text-sm font-medium text-accent-700">Changelog</p>
+    <h1 class="font-display font-semibold text-3xl md:text-4xl tracking-tight text-ink-900 mt-2">Per-control version history</h1>
+    <p class="mt-3 text-ink-600 max-w-prose-wide">
+      Every control is independently versioned. Each entry below corresponds
+      to a published change to a single control.
+    </p>
+
+    <ul class="mt-10 divide-y divide-ink-100">
+      {entries.map((e) => (
+        <li class="py-4 grid sm:grid-cols-[100px_120px_1fr] gap-2 sm:gap-6 text-sm">
+          <time class="font-mono text-ink-500">{e.date}</time>
+          <a href={`/controls/${e.id}`} class="font-mono text-accent-700 hover:underline">{e.id} v{e.version}</a>
+          <p class="text-ink-700"><strong class="text-ink-900">{e.title}.</strong> {e.change}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

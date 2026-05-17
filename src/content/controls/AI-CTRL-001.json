@@ -1,0 +1,88 @@
+{
+  "id": "AI-CTRL-001",
+  "version": "1.0.0",
+  "title": "AI System Inventory and Classification",
+  "category": "Governance",
+  "control_type": "directive",
+  "lifecycle_stage": ["Strategy & Planning", "Operation & Monitoring"],
+  "risk_domain": ["Governance"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Traditional ML", "Computer Vision", "Generative AI"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid", "Edge"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "NIST AI RMF", "Banking", "Healthcare"],
+    "company_size": ["SMB", "MidMarket", "Enterprise"]
+  },
+  "objective": "Maintain a complete, current, and classified inventory of all AI systems in development, deployment, and decommissioning to enable risk-based governance.",
+  "rationale": "Without a comprehensive inventory, organizations cannot apply risk-based controls, comply with regulations such as the EU AI Act (which requires classification), or detect Shadow AI. The inventory is the foundation for every other AI control.",
+  "control_narrative": "The organization maintains an authoritative inventory of all AI systems across the lifecycle. Each entry captures owner, business purpose, AI type, data sensitivity, autonomy level, third-party dependencies, deployment environment, regulatory classification (e.g., EU AI Act risk tier), and lifecycle stage. The inventory is reviewed quarterly and updated upon any material change. Intake of new AI systems requires registration prior to development or procurement. The inventory is governed by a designated owner (typically the AI Governance lead or CISO) and integrated with related registers (asset, application, vendor).",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the AI System Inventory and confirm it is centrally managed and version-controlled.",
+      "Confirm the inventory schema includes: owner, business purpose, AI type, data sensitivity, autonomy level, third-party dependencies, deployment, regulatory classification, lifecycle stage.",
+      "Confirm a documented intake process exists requiring registration prior to development or procurement.",
+      "Confirm review frequency is documented (minimum quarterly) with an assigned owner."
+    ],
+    "inquiries": [
+      "Who owns the AI inventory?",
+      "How are new AI systems discovered and registered?",
+      "How are Shadow AI / unauthorized AI systems identified?",
+      "What is the integration with the broader IT asset and application registers?"
+    ],
+    "inspections": [
+      "AI Inventory policy or standard.",
+      "Inventory schema or data dictionary.",
+      "Intake / registration workflow documentation.",
+      "Sample of completed registration submissions."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "For the audit period, obtain the population of net-new AI systems registered.",
+      "For a sample, confirm registration occurred prior to production deployment by inspecting workflow timestamps and change records.",
+      "For each sampled system, confirm all required fields are populated and accurate by inspecting source artifacts (architecture diagrams, vendor contracts, DPIAs).",
+      "Independently corroborate inventory completeness by sampling 5–10 known AI use cases (from interviews, network logs, SaaS spend, code repos) and confirming they appear in the inventory.",
+      "For systems flagged as 'high-risk' under EU AI Act or equivalent, confirm classification rationale is documented."
+    ],
+    "sample_size_guidance": {
+      "population_type": "Net-new AI systems registered in audit period",
+      "low_risk": "5 systems",
+      "moderate_risk": "10 systems",
+      "high_risk": "25 systems or 100% of high-risk classifications"
+    },
+    "reperformance_steps": [
+      "For 3 sampled systems, independently re-derive the EU AI Act risk classification using the published criteria and compare to management's classification."
+    ]
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "AI Inventory export (current state)", "format": "CSV/Excel", "frequency": "At fieldwork" },
+      { "item": "AI Inventory policy", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Registration workflow / ticket samples", "format": "Screenshots or system export", "frequency": "Per sample" },
+      { "item": "EU AI Act classification rationale (for high-risk systems)", "format": "Documented assessment", "frequency": "Per high-risk system" }
+    ],
+    "supporting": [
+      { "item": "Inventory change logs", "format": "System log export", "frequency": "Annual" },
+      { "item": "Quarterly review meeting minutes", "format": "Meeting notes", "frequency": "Per quarter in scope" }
+    ],
+    "retention_period": "7 years for regulated environments; 3 years otherwise"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["6.1.2", "6.1.4", "8.2"],
+    "nist_ai_rmf": ["GOVERN-1.6", "MAP-1.1", "MAP-3.1"],
+    "eu_ai_act": ["Article 6", "Article 9", "Article 11"],
+    "owasp_dsgai": ["DSGAI01", "DSGAI02"]
+  },
+  "related_controls": ["AI-CTRL-002", "AI-CTRL-004", "AI-CTRL-020"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "ISO/IEC 42001:2023 — AI management systems", "url": "https://www.iso.org/standard/81230.html" },
+    { "title": "NIST AI Risk Management Framework 1.0", "url": "https://www.nist.gov/itl/ai-risk-management-framework" },
+    { "title": "EU AI Act — Regulation (EU) 2024/1689", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" }
+  ]
+}

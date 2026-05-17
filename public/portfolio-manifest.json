@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "repos": {
+    "AI-Controls-Catalog": {
+      "url": "https://aicontrolscatalog.dev",
+      "github": "https://github.com/emmanuelgjr/AI-Controls-Catalog",
+      "tagline": "The audit-ready controls library for AI systems.",
+      "accent_color": "#0F766E"
+    },
+    "AI-RedTeam-Framework": {
+      "url": "https://airedteam.dev",
+      "github": "https://github.com/emmanuelgjr/AI-RedTeam-Framework",
+      "tagline": "Stand up an AI red team at a regulated enterprise.",
+      "accent_color": "#9F1239"
+    },
+    "AI-Governance-Toolkit": {
+      "url": "https://aigovernancetoolkit.dev",
+      "github": "https://github.com/emmanuelgjr/AI-Governance-Toolkit",
+      "tagline": "Stand up AI governance in your organization. By Friday.",
+      "accent_color": "#5B21B6"
+    },
+    "Shadow-AI-Defense": {
+      "url": "https://shadowaidefense.dev",
+      "github": "https://github.com/emmanuelgjr/Shadow-AI-Defense",
+      "tagline": "Detect and respond to Shadow AI in your enterprise.",
+      "accent_color": "#B45309"
+    }
+  }
+}

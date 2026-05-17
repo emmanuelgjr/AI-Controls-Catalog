@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Emmanuel Guilherme Jr.',
+  url: 'https://github.com/emmanuelgjr',
+  sameAs: [
+    'https://www.linkedin.com/in/emmanuelgjr/',
+    'https://genai.owasp.org/',
+  ],
+  jobTitle: 'Senior Global IT Auditor',
+  knowsAbout: ['AI security', 'AI governance', 'ISO/IEC 42001', 'IT audit', 'OWASP GenAI'],
+};
+---
+
+<BaseLayout
+  title="About — AI Controls Catalog"
+  description="About the author and the four-repo open-source AI security portfolio."
+  structuredData={structuredData}
+>
+  <section class="max-w-content mx-auto px-6 lg:px-8 py-12">
+    <p class="text-sm font-medium text-accent-700">About</p>
+    <h1 class="font-display font-semibold text-3xl md:text-4xl tracking-tight text-ink-900 mt-2">
+      About the author
+    </h1>
+
+    <div class="prose prose-lg max-w-prose-wide mt-8">
+      <p>
+        <strong>Emmanuel Guilherme Jr.</strong> is a Senior Global Information
+        Technology Auditor and AI security researcher based in Toronto,
+        Canada.
+      </p>
+      <p>
+        He co-leads the Data Security Initiative of the
+        <strong>OWASP GenAI Security Project</strong>, contributing to the
+        <em>GenAI Data Security Risks and Mitigations 2026</em> publication.
+        He serves as a <strong>Candidate Expert</strong> on Canada's mirror
+        committee for <strong>ISO/IEC JTC 1/SC 42</strong>, the body that
+        shapes ISO/IEC 42001 (AI management systems), 23894 (AI risk
+        management), and 42005 (AI system impact assessment). He co-founded
+        the <strong>Toronto chapter of Threat Modeling Connect</strong> and
+        is a technical reviewer for <strong>Packt</strong> publications on AI
+        security.
+      </p>
+      <p>
+        His professional work spans IT audit at a Tier 1 multinational, an
+        in-house Red Team build at a Canadian Schedule I bank, and AI
+        security research at McMaster University. He is trilingual (English,
+        Portuguese, Spanish) and currently pursuing CISA, AIGP, and ISO/IEC
+        42001 Lead Auditor certifications.
+      </p>
+      <p>
+        Find him at
+        <a href="https://www.linkedin.com/in/emmanuelgjr/">LinkedIn</a> ·
+        <a href="https://github.com/emmanuelgjr">GitHub</a> ·
+        <a href="https://genai.owasp.org/">OWASP GenAI Security Project</a>.
+      </p>
+
+      <h2>The four-repo portfolio</h2>
+      <p>This catalog is one of four signature projects:</p>
+      <ul>
+        <li><a href="https://github.com/emmanuelgjr/AI-Controls-Catalog"><strong>AI-Controls-Catalog</strong></a> — Audit AI <em>(this repo)</em></li>
+        <li><a href="https://github.com/emmanuelgjr/AI-RedTeam-Framework"><strong>AI-RedTeam-Framework</strong></a> — Attack AI</li>
+        <li><a href="https://github.com/emmanuelgjr/AI-Governance-Toolkit"><strong>AI-Governance-Toolkit</strong></a> — Govern AI</li>
+        <li><a href="https://github.com/emmanuelgjr/Shadow-AI-Defense"><strong>Shadow-AI-Defense</strong></a> — Defend against rogue AI</li>
+      </ul>
+      <p>The four-repo system represents <em>Govern → Audit → Attack → Defend</em>: a program-level open-source AI security ecosystem for regulated enterprises.</p>
+
+      <h2>Citation</h2>
+      <p class="font-mono text-sm">Guilherme Jr., E. (2026). <em>AI Controls Catalog</em> (Version 0.1.0). https://aicontrolscatalog.dev</p>
+
+      <h2>Licensing</h2>
+      <ul>
+        <li>Code: <a href="https://github.com/emmanuelgjr/AI-Controls-Catalog/blob/main/LICENSE">MIT</a></li>
+        <li>Content: <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

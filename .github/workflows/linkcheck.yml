@@ -1,0 +1,21 @@
+name: Weekly link check
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+jobs:
+  linkcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --verbose --max-redirects 5 './**/*.md' './**/*.json'
+          fail: false
+          output: linkcheck.txt
+      - if: failure()
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: 'Broken links detected by weekly lychee scan'
+          content-filepath: linkcheck.txt
+          labels: bug, linkrot

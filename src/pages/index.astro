@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ControlCard from '../components/ControlCard.astro';
+import { getCollection } from 'astro:content';
+
+const controls = (await getCollection('controls')).map((c) => c.data);
+const featured = controls.filter((c) =>
+  ['AI-CTRL-001', 'AI-CTRL-003', 'AI-CTRL-020'].includes(c.id),
+);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'AI Controls Catalog',
+  url: 'https://aicontrolscatalog.dev',
+  description: 'Audit-ready controls library for AI systems.',
+  publisher: {
+    '@type': 'Person',
+    name: 'Emmanuel Guilherme Jr.',
+    url: 'https://github.com/emmanuelgjr',
+  },
+};
+---
+
+<BaseLayout
+  title="AI Controls Catalog — The audit-ready controls library for AI systems"
+  description="Audit-ready AI controls with Test of Design, Test of Operating Effectiveness, evidence requirements, and sample sizes. Mapped to ISO 42001, NIST AI RMF, EU AI Act, OWASP."
+  structuredData={structuredData}
+>
+  <section class="max-w-content mx-auto px-6 lg:px-8 pt-16 pb-12">
+    <div class="max-w-3xl">
+      <p class="text-sm font-medium text-accent-700 mb-3">Audit AI</p>
+      <h1 class="font-display font-semibold tracking-tight text-4xl md:text-5xl text-ink-900">
+        The audit-ready controls library for AI systems.
+      </h1>
+      <p class="mt-5 text-lg text-ink-600 leading-relaxed">
+        Test of Design. Test of Operating Effectiveness. Evidence requirements.
+        Sample sizes. Framework mappings. Authored by a senior IT auditor for
+        the auditors, AI governance leads, and supervisory authorities
+        responsible for AI systems in regulated enterprises.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/controls" class="btn btn-primary btn-lg">Browse all controls</a>
+        <a href="/methodology" class="btn btn-secondary btn-lg">How it's built</a>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-500">
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-accent-500" aria-hidden></span> ISO/IEC 42001</span>
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-accent-500" aria-hidden></span> NIST AI RMF</span>
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-accent-500" aria-hidden></span> EU AI Act</span>
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-accent-500" aria-hidden></span> OWASP LLM / Agentic / DSGAI</span>
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-accent-500" aria-hidden></span> MITRE ATLAS</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-content mx-auto px-6 lg:px-8 py-12 border-t border-ink-100">
+    <h2 class="font-display font-semibold text-3xl text-ink-900 tracking-tight">Why this exists</h2>
+    <div class="grid md:grid-cols-3 gap-6 mt-8">
+      <div class="card">
+        <h3 class="text-lg font-semibold text-ink-900">Audit-ready</h3>
+        <p class="mt-2 text-sm text-ink-600">
+          Every control has ToD procedures, ToOE procedures with sample sizes,
+          and evidence requirements. Drop straight into a working paper.
+        </p>
+      </div>
+      <div class="card">
+        <h3 class="text-lg font-semibold text-ink-900">Multi-framework</h3>
+        <p class="mt-2 text-sm text-ink-600">
+          One control, all the mappings: ISO 42001, NIST AI RMF, EU AI Act,
+          OWASP LLM / Agentic / DSGAI, SOC 2, MITRE ATLAS, OSFI E-21.
+        </p>
+      </div>
+      <div class="card">
+        <h3 class="text-lg font-semibold text-ink-900">Practitioner-authored</h3>
+        <p class="mt-2 text-sm text-ink-600">
+          Authored by a senior IT auditor who co-leads OWASP GenAI Data
+          Security and sits on Canada's ISO/IEC JTC 1/SC 42 mirror committee.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-content mx-auto px-6 lg:px-8 py-12 border-t border-ink-100">
+    <div class="flex items-end justify-between mb-8">
+      <h2 class="font-display font-semibold text-3xl text-ink-900 tracking-tight">Featured controls</h2>
+      <a href="/controls" class="text-sm font-medium text-accent-700 hover:text-accent-800">View all {controls.length} →</a>
+    </div>
+    <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {featured.map((c) => (
+        <li><ControlCard control={c} /></li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="max-w-content mx-auto px-6 lg:px-8 py-12 border-t border-ink-100">
+    <div class="max-w-prose-wide">
+      <h2 class="font-display font-semibold text-3xl text-ink-900 tracking-tight">About the author</h2>
+      <p class="mt-4 text-ink-700 leading-relaxed">
+        <strong>Emmanuel Guilherme Jr.</strong> is a Senior Global IT Auditor
+        and AI security researcher based in Toronto, Canada. He co-leads the
+        Data Security Initiative of the OWASP GenAI Security Project and
+        serves as a Candidate Expert on Canada's mirror committee for ISO/IEC
+        JTC 1/SC 42, the body that shapes ISO/IEC 42001, 23894, and 42005.
+      </p>
+      <a href="/about" class="inline-block mt-4 text-accent-700 font-medium hover:text-accent-800">Full bio →</a>
+    </div>
+  </section>
+</BaseLayout>

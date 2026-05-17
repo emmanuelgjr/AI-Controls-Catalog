@@ -1,0 +1,89 @@
+{
+  "id": "AI-CTRL-020",
+  "version": "1.0.0",
+  "title": "Shadow AI Detection",
+  "category": "Governance",
+  "control_type": "detective",
+  "lifecycle_stage": ["Operation & Monitoring"],
+  "risk_domain": ["Governance", "Data", "People & Process"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Generative AI", "Multi-modal", "Traditional ML"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid"],
+    "regulatory_regimes": ["EU AI Act", "GDPR", "ISO 42001", "Banking", "Healthcare"],
+    "company_size": ["MidMarket", "Enterprise"]
+  },
+  "objective": "Detect, triage, and remediate use of unsanctioned AI services and unauthorized AI tooling by employees, contractors, and other authorized users, with documented response and metrics.",
+  "rationale": "Shadow AI is the #1 AI risk on most CISO desks: employees pasting sensitive data into consumer AI services, installing browser extensions, signing up for free tiers with personal accounts, or building API-based agents outside sanctioned environments. The combination of low friction and high productivity makes Shadow AI inevitable; the only viable response is detection-plus-graduated-response. Sectoral regulators (OSFI, NYDFS) and GDPR enforcement bodies are increasingly examining Shadow AI controls.",
+  "control_narrative": "The organization maintains technical and process controls to detect Shadow AI use across managed endpoints, networks, and cloud-app activity. Detection sources include: network egress to consumer AI service domains, endpoint process / browser-extension telemetry, DLP triggers on data egress to AI services, CASB/SaaS-discovery for unsanctioned subscriptions, identity-provider analytics for newly authorized AI applications. Detections route through documented runbooks producing graduated response: first-occurrence comms (education + approved-tool path); repeat-occurrence escalation; confirmed sensitive-data egress incident response. Approved-tool launch communications precede enforcement to give users a constructive path. Program metrics (detection volume, time-to-respond, repeat rate, conversion to approved tools) are reported quarterly to the AI Governance committee. The control references the Shadow-AI-Defense detection library and runbooks for implementation depth.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the Shadow AI Detection standard and confirm detection sources, runbook coverage, and metrics.",
+      "Confirm graduated response (education, escalation, incident) with documented criteria.",
+      "Confirm approved-tool launch precedes enforcement (rollout sequencing).",
+      "Confirm metrics, reporting cadence, and accountable owner.",
+      "Confirm integration with the AI Acceptable Use Policy (AI-CTRL-016) and Incident Response (AI-CTRL-009)."
+    ],
+    "inquiries": [
+      "Who owns Shadow AI detection?",
+      "How is the consumer-AI watchlist maintained as new services emerge?",
+      "How are personal-device and BYO-API-key channels addressed where direct technical detection is limited?",
+      "How are repeat offenders escalated?"
+    ],
+    "inspections": [
+      "Shadow AI Detection standard.",
+      "Detection rule inventory.",
+      "Runbook samples.",
+      "Quarterly metrics reports.",
+      "Approved-tool launch communications."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "For the audit period, obtain the population of Shadow AI alerts.",
+      "Sample alerts and confirm runbook execution per the standard.",
+      "Confirm communications were sent per the appropriate stage (first / repeat) within documented SLAs.",
+      "For confirmed sensitive-data egress events, confirm escalation to AI-CTRL-009 IR runbooks.",
+      "Confirm quarterly metrics reports are produced and reviewed.",
+      "Independently corroborate detection completeness by sampling a small set of consumer AI services and confirming they appear on the watchlist."
+    ],
+    "sample_size_guidance": {
+      "population_type": "Shadow AI alerts in audit period",
+      "low_risk": "25 alerts",
+      "moderate_risk": "60 alerts",
+      "high_risk": "150 alerts or 100% of high-severity / sensitive-data egress events"
+    }
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "Shadow AI Detection standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Detection rule inventory and configurations", "format": "System export", "frequency": "At fieldwork" },
+      { "item": "Runbook samples and execution records", "format": "PDF/system", "frequency": "Per sample" },
+      { "item": "Quarterly metrics reports", "format": "PDF/Excel", "frequency": "Quarterly" }
+    ],
+    "supporting": [
+      { "item": "Consumer AI watchlist with last-updated timestamps", "format": "CSV/JSON", "frequency": "Monthly" },
+      { "item": "Approved-tool launch communications", "format": "Email/portal", "frequency": "Per launch" }
+    ],
+    "retention_period": "7 years for regulated environments; 3 years otherwise"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["8.2", "8.4"],
+    "nist_ai_rmf": ["GOVERN-4.1", "MANAGE-2.2", "MANAGE-4.1"],
+    "eu_ai_act": ["Article 4"],
+    "owasp_dsgai": ["DSGAI20", "DSGAI21"],
+    "nist_csf": ["DE.CM-3", "DE.CM-7", "RS.AN-1"]
+  },
+  "related_controls": ["AI-CTRL-001", "AI-CTRL-016", "AI-CTRL-009"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "NIST CSF — Detection and Response functions", "url": "https://www.nist.gov/cyberframework" },
+    { "title": "EU AI Act Article 4 — AI Literacy", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" },
+    { "title": "OWASP GenAI Data Security 2026 — Shadow AI", "url": "https://genai.owasp.org/" }
+  ]
+}

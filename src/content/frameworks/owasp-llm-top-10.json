@@ -1,0 +1,9 @@
+{
+  "slug": "owasp-llm-top-10",
+  "name": "OWASP Top 10 for LLM Applications 2025",
+  "short_name": "OWASP LLM Top 10",
+  "publisher": "OWASP GenAI Security Project",
+  "description": "Community-led ranked list of the most critical security risks for applications built with large language models.",
+  "color_mark": "#BE185D",
+  "url": "https://genai.owasp.org/llm-top-10/"
+}

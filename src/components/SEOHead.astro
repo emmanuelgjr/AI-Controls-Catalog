@@ -1,0 +1,40 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  structuredData?: Record<string, unknown>;
+}
+
+const { title, description, canonical, ogType = 'website', ogImage, structuredData } = Astro.props;
+const ogImageUrl = ogImage ?? new URL('/og-image.png', Astro.site).toString();
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content="AI Controls Catalog" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+{structuredData && (
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+)}

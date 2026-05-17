@@ -1,0 +1,9 @@
+{
+  "slug": "mitre-atlas",
+  "name": "MITRE ATLAS",
+  "short_name": "MITRE ATLAS",
+  "publisher": "MITRE Corporation",
+  "description": "Adversarial Threat Landscape for AI Systems — a knowledge base of adversary tactics, techniques, and case studies against machine learning systems, modeled after MITRE ATT&CK.",
+  "color_mark": "#92400E",
+  "url": "https://atlas.mitre.org/"
+}

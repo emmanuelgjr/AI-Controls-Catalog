@@ -1,0 +1,90 @@
+{
+  "id": "AI-CTRL-009",
+  "version": "1.0.0",
+  "title": "AI Incident Response Procedures",
+  "category": "Incident Management",
+  "control_type": "corrective",
+  "lifecycle_stage": ["Operation & Monitoring"],
+  "risk_domain": ["Governance", "Model", "Data"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Traditional ML", "Computer Vision", "Generative AI", "Multi-modal"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid", "Edge"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "Banking", "Healthcare"],
+    "company_size": ["MidMarket", "Enterprise"]
+  },
+  "objective": "Maintain a tested AI-specific incident response capability that detects, triages, contains, and recovers from AI incidents (prompt injection, model misbehavior, data exfiltration, decision errors with material impact), with regulator notification per applicable rules.",
+  "rationale": "AI incidents differ from traditional cyber incidents: they often originate from model behavior rather than infrastructure compromise; they may be subtle (slow drift, biased outputs) rather than immediate; and they require AI-domain expertise to triage. EU AI Act Article 73 requires reporting of serious incidents for high-risk systems. Generic IR runbooks miss AI-specific containment options (rollback model version, disable tool, lower autonomy) and AI-specific stakeholders (AI Governance, Model Owner).",
+  "control_narrative": "The organization maintains AI-specific runbooks integrated with the broader Cyber Incident Response Plan. Runbooks cover at minimum: confirmed prompt injection with material impact, model misbehavior (bias, hallucination producing harm), training/inference data exfiltration, agentic misuse, vendor AI incident affecting the org, and decision errors with regulatory impact. Each runbook specifies trigger criteria, response phases (immediate / short-term / long-term), RACI, AI-specific containment options, evidence preservation requirements, stakeholder communications (including regulator notification timelines), and post-incident review obligations. Runbooks are tested at minimum annually via tabletop exercise. AI incidents are tracked in the central incident system with AI-specific tags.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the AI Incident Response standard and confirm scope and integration with the cyber IR plan.",
+      "Confirm runbooks exist for the minimum incident types listed in the control narrative.",
+      "Confirm regulator notification timelines and decision-making authority are documented (e.g., EU AI Act Article 73; sectoral rules).",
+      "Confirm annual tabletop requirement and post-incident review requirement.",
+      "Confirm AI-specific tagging in the central incident system."
+    ],
+    "inquiries": [
+      "Who is on the AI Incident Response standing team?",
+      "How is the decision made to invoke an AI runbook vs. the generic cyber runbook?",
+      "How are vendor AI incidents tracked and acted upon?",
+      "How is communication coordinated for incidents with public/customer impact?"
+    ],
+    "inspections": [
+      "AI Incident Response standard.",
+      "Runbook inventory.",
+      "Tabletop exercise reports for the audit period.",
+      "Sample of incident records from the audit period (if any).",
+      "Post-incident review documentation."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "For the audit period, obtain the population of AI-tagged incidents.",
+      "For a sample, confirm the appropriate runbook was invoked and steps documented per the runbook structure.",
+      "Confirm regulator-notification timelines were met for incidents meeting reporting criteria.",
+      "Inspect post-incident review documentation and confirm root cause, lessons learned, and remediation owners are recorded.",
+      "Confirm annual tabletop occurred with documented scenario, participants, and findings.",
+      "For tabletop findings, trace to closure of action items."
+    ],
+    "sample_size_guidance": {
+      "population_type": "AI-tagged incidents in audit period (or simulated scenarios if zero)",
+      "low_risk": "All incidents up to 5; otherwise 5",
+      "moderate_risk": "10 incidents",
+      "high_risk": "25 incidents or 100% of reported-to-regulator events"
+    }
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "AI Incident Response standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Runbook inventory and sampled runbooks", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Tabletop exercise report for audit period", "format": "PDF/Word", "frequency": "Annual" },
+      { "item": "Incident records for sampled events", "format": "System export", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Regulator notification records", "format": "PDF/email", "frequency": "Per applicable event" },
+      { "item": "Post-incident review documents", "format": "PDF/Word", "frequency": "Per applicable event" }
+    ],
+    "retention_period": "10 years for regulated environments; 7 years otherwise"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["8.5", "10.1", "10.2"],
+    "nist_ai_rmf": ["MANAGE-2.3", "MANAGE-4.3"],
+    "eu_ai_act": ["Article 73"],
+    "owasp_llm_top_10": ["LLM10:2025"],
+    "nist_csf": ["RS.RP-1", "RS.AN-1", "RS.MI-1", "RC.RP-1"],
+    "osfi_e21": ["Principle 5"]
+  },
+  "related_controls": ["AI-CTRL-008", "AI-CTRL-003"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "EU AI Act Article 73 — Reporting of serious incidents", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" },
+    { "title": "NIST AI RMF — MANAGE function", "url": "https://www.nist.gov/itl/ai-risk-management-framework" },
+    { "title": "ISO/IEC 42001:2023, clause 10", "url": "https://www.iso.org/standard/81230.html" }
+  ]
+}

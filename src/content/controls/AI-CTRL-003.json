@@ -1,0 +1,100 @@
+{
+  "id": "AI-CTRL-003",
+  "version": "1.0.0",
+  "title": "Adversarial Robustness Testing for LLM Systems",
+  "category": "Security & Adversarial Robustness",
+  "control_type": "detective",
+  "lifecycle_stage": ["Evaluation & Testing", "Operation & Monitoring"],
+  "risk_domain": ["Model", "Data"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Generative AI", "Multi-modal"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid", "Edge"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "NIST AI RMF", "Banking", "Healthcare"],
+    "company_size": ["MidMarket", "Enterprise"]
+  },
+  "objective": "Validate that production-bound LLM and agentic AI systems have been tested against direct prompt injection, indirect prompt injection, jailbreak, refusal evasion, and (where applicable) multi-modal adversarial inputs, with documented findings, remediation, and re-test cycles.",
+  "rationale": "Prompt injection is the #1 OWASP risk for LLM applications and the most reliable foothold for adversaries against AI systems. Without periodic, documented adversarial testing, organizations cannot demonstrate evaluative due diligence required by ISO/IEC 42001, the EU AI Act (Article 15 — accuracy, robustness, cybersecurity), and NIST AI RMF MEASURE-2.7. Adversarial testing also produces the evidence base for risk-acceptance decisions when residual issues cannot be eliminated.",
+  "control_narrative": "Each LLM and agentic AI system within scope undergoes adversarial testing at defined milestones: pre-production (mandatory before approval to deploy), upon any material change (new model version, expanded toolset, new data sources), and at minimum quarterly thereafter for systems in production. Testing covers, at minimum: direct prompt injection across user-controllable inputs; indirect prompt injection through RAG sources, document uploads, tool outputs, and (where applicable) multi-modal channels; refusal evasion / jailbreak techniques; system prompt leakage; and output handling weaknesses. Tests are executed by an internal AI Red Team, qualified third party, or a documented combination. Findings are recorded with severity, evidence, root cause, remediation owner, target date, and verification of re-test. The AI Governance lead is accountable for the catalog of tested systems and the open-findings register.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the Adversarial Testing standard and confirm coverage of: direct prompt injection, indirect prompt injection, refusal evasion, system prompt leakage, output handling, and multi-modal channels where applicable.",
+      "Confirm testing milestones are documented: pre-production, material change, periodic (≤ quarterly for production systems).",
+      "Confirm the standard requires testing by qualified parties (internal AI Red Team or qualified third party) with defined competency requirements.",
+      "Confirm a findings register exists with required fields: severity, evidence, root cause, remediation owner, target date, re-test verification.",
+      "Confirm linkage to the AI System Inventory (AI-CTRL-001) so every in-scope system maps to a testing record.",
+      "Confirm the standard references an AI Red Team engagement model and Rules of Engagement."
+    ],
+    "inquiries": [
+      "Who is qualified to perform adversarial testing? How is competency assessed?",
+      "How are third-party testers selected and overseen?",
+      "How is testing scope kept current with evolving threat patterns (e.g., new OWASP LLM Top 10 entries, MITRE ATLAS techniques)?",
+      "What is the escalation path when testing reveals critical findings?",
+      "How is testing scope adjusted for agentic systems (tool authorization, multi-agent collusion)?"
+    ],
+    "inspections": [
+      "Adversarial Testing standard / policy.",
+      "Approved testing methodology document.",
+      "Findings register schema and a sample of records.",
+      "Third-party tester agreements where applicable.",
+      "Mapping of AI systems in the inventory to their testing records."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the AI System Inventory, select a sample of LLM and agentic AI systems in production during the audit period.",
+      "For each sampled system, obtain testing records and confirm: pre-production test occurred prior to deployment; material-change tests are present for each material change in the audit period; periodic tests occurred at minimum quarterly.",
+      "Inspect the test reports and confirm coverage of mandatory categories per the standard (direct PI, indirect PI, refusal evasion, prompt leakage, output handling, multi-modal where applicable).",
+      "For findings raised during the audit period, confirm: severity is assigned consistent with the standard; remediation owner and target date are recorded; re-test is verified for closed items; open items past target are tracked and escalated.",
+      "Independently re-test a sample of closed high or critical findings by reviewing the re-test evidence (test artifacts, screenshots, logs).",
+      "For systems tested by third parties, confirm tester qualifications were documented and contracts include scope, rules of engagement, and non-disclosure terms.",
+      "Confirm the catalog of tested systems reconciles to the AI System Inventory with no untested production LLM/agentic systems."
+    ],
+    "sample_size_guidance": {
+      "population_type": "Production LLM and agentic AI systems",
+      "low_risk": "5 systems × 1 most recent test cycle",
+      "moderate_risk": "10 systems × 2 most recent test cycles",
+      "high_risk": "25 systems × all test cycles in period, or 100% of EU AI Act high-risk and customer-facing systems"
+    },
+    "reperformance_steps": [
+      "For 2 closed high or critical findings, independently corroborate the re-test by inspecting raw test artifacts (request/response logs, test harness output).",
+      "For 1 system, independently execute 5 representative prompt-injection probes from public corpora (OWASP, MITRE ATLAS) against a non-production replica and compare results to the latest test report."
+    ]
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "Adversarial Testing standard / policy", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Findings register export", "format": "CSV/Excel", "frequency": "At fieldwork" },
+      { "item": "Test reports for sampled systems", "format": "PDF/Word", "frequency": "Per sample" },
+      { "item": "Re-test evidence for closed high/critical findings", "format": "Logs/screenshots/PDF", "frequency": "Per sample" },
+      { "item": "Third-party tester agreements (where applicable)", "format": "PDF", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Tester competency records", "format": "HR / training records", "frequency": "Per sample" },
+      { "item": "Methodology versioning / changelog", "format": "Document or repo", "frequency": "Annual" }
+    ],
+    "retention_period": "7 years for regulated environments; 3 years otherwise"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["8.3", "9.1", "9.2"],
+    "nist_ai_rmf": ["MEASURE-2.7", "MEASURE-2.8", "MANAGE-2.3"],
+    "eu_ai_act": ["Article 15"],
+    "owasp_llm_top_10": ["LLM01:2025", "LLM02:2025", "LLM06:2025"],
+    "owasp_agentic_top_10": ["AAI01", "AAI03"],
+    "owasp_dsgai": ["DSGAI09", "DSGAI10"],
+    "mitre_atlas": ["AML.T0051", "AML.T0054", "AML.T0067"]
+  },
+  "related_controls": ["AI-CTRL-001", "AI-CTRL-014", "AI-CTRL-007"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "OWASP Top 10 for LLM Applications 2025", "url": "https://genai.owasp.org/llm-top-10/" },
+    { "title": "MITRE ATLAS", "url": "https://atlas.mitre.org/" },
+    { "title": "NIST AI RMF — MEASURE-2.7 Adversarial Testing", "url": "https://www.nist.gov/itl/ai-risk-management-framework" },
+    { "title": "EU AI Act Article 15 — Accuracy, robustness and cybersecurity", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" }
+  ]
+}

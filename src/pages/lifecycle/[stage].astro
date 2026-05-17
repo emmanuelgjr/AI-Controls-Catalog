@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ControlCard from '../../components/ControlCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const stages = [
+    'Strategy & Planning',
+    'Data Sourcing & Preparation',
+    'Training',
+    'Evaluation & Testing',
+    'Deployment',
+    'Operation & Monitoring',
+    'Retirement',
+  ];
+  const slugify = (s: string) =>
+    s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const controls = await getCollection('controls');
+  return stages.map((s) => ({
+    params: { stage: slugify(s) },
+    props: { stageName: s, allControls: controls.map((c) => c.data) },
+  }));
+}
+
+const { stageName, allControls } = Astro.props;
+const matches = allControls.filter((c) => c.lifecycle_stage.includes(stageName as any));
+---
+
+<BaseLayout
+  title={`${stageName} — AI Lifecycle — AI Controls Catalog`}
+  description={`${matches.length} AI controls relevant to the ${stageName} lifecycle stage.`}
+>
+  <section class="max-w-content mx-auto px-6 lg:px-8 py-12">
+    <a href="/lifecycle" class="text-sm text-ink-500 hover:text-accent-700">← All lifecycle stages</a>
+    <p class="mt-3 text-sm font-medium text-accent-700">Lifecycle</p>
+    <h1 class="font-display font-semibold text-3xl md:text-4xl tracking-tight text-ink-900 mt-2">{stageName}</h1>
+    <p class="mt-3 text-ink-600">{matches.length} controls apply at this stage.</p>
+
+    <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+      {matches.map((c) => (<li><ControlCard control={c} /></li>))}
+    </ul>
+  </section>
+</BaseLayout>

@@ -1,0 +1,89 @@
+{
+  "id": "AI-CTRL-017",
+  "version": "1.0.0",
+  "title": "Pre-Production AI Evaluation Gates",
+  "category": "Model Lifecycle",
+  "control_type": "preventive",
+  "lifecycle_stage": ["Evaluation & Testing", "Deployment"],
+  "risk_domain": ["Model", "Data"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Traditional ML", "Computer Vision", "Generative AI", "Multi-modal", "Recommender"],
+    "deployment_models": ["Self-hosted", "Hybrid", "Edge"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "NIST AI RMF", "Banking", "Healthcare"],
+    "company_size": ["MidMarket", "Enterprise"]
+  },
+  "objective": "Require explicit, documented evaluation against defined thresholds — covering performance, fairness, robustness, safety, and (where applicable) drift baselines — as a gate to production deployment for every AI system.",
+  "rationale": "Deploy-to-production without an evaluation gate is the single most common source of post-deployment AI incidents. EU AI Act Annex IV requires evaluation records for high-risk systems; NIST AI RMF MEASURE-2 requires repeatable measurement; ISO/IEC 42001 clause 9.1 requires evaluation. A formal gate ensures evaluation happens, that thresholds are met, and that exceptions are documented at an appropriate authority.",
+  "control_narrative": "Every AI system must pass a documented evaluation gate before promotion to production. The gate verifies: performance metrics meet documented thresholds against representative evaluation data; fairness metrics meet thresholds across protected subgroups (where applicable); robustness/adversarial-testing results are within tolerance (AI-CTRL-003 / AI-CTRL-014); safety testing for systems with material impact (e.g., red-team evaluation for LLM agents); drift baseline established for monitoring; documentation per AI-CTRL-012 is complete. Failure to meet a threshold blocks promotion; exception requires sign-off from the AI Governance lead and the business sponsor, with compensating controls and remediation plan recorded.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the Evaluation Gate standard and confirm scope, threshold definitions, and gate authority.",
+      "Confirm evaluation categories required (performance, fairness, robustness, safety, drift baseline, documentation).",
+      "Confirm exception process with sign-off authority and compensating-control requirement.",
+      "Confirm linkage to AI-CTRL-010 (Change Control), AI-CTRL-011 (Fairness), AI-CTRL-003/014 (Adversarial), AI-CTRL-012 (Documentation)."
+    ],
+    "inquiries": [
+      "Who is the gatekeeper? Is this separate from the model author?",
+      "How are thresholds set for each system?",
+      "How are evaluation datasets kept representative of production?",
+      "What is the override path and how often is it invoked?"
+    ],
+    "inspections": [
+      "Evaluation Gate standard.",
+      "Threshold definitions per system type / risk tier.",
+      "Sample of evaluation gate decisions (approved, rejected, exception).",
+      "Exception records with sign-off and compensating controls."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the inventory, sample model promotions to production in the audit period.",
+      "For each, confirm a documented evaluation gate decision exists, pre-dating promotion.",
+      "Inspect the evaluation record for completeness across required categories.",
+      "Confirm thresholds were met or exception sign-off is documented.",
+      "Confirm gatekeeper identity is separate from model author.",
+      "For exceptions, confirm compensating controls were implemented (trace to operational evidence).",
+      "Confirm drift baselines were established and are referenced in monitoring (AI-CTRL-008)."
+    ],
+    "sample_size_guidance": {
+      "population_type": "Model promotions to production in audit period",
+      "low_risk": "5 promotions",
+      "moderate_risk": "10 promotions",
+      "high_risk": "25 promotions or 100% of EU AI Act high-risk"
+    },
+    "reperformance_steps": [
+      "For 1 sampled promotion, independently re-run a subset of the documented evaluation suite and confirm results match the gate decision."
+    ]
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "Evaluation Gate standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Gate decision records for sampled promotions", "format": "System / PDF", "frequency": "Per sample" },
+      { "item": "Evaluation reports underlying gate decisions", "format": "PDF/Notebook", "frequency": "Per sample" },
+      { "item": "Exception sign-off records (where applicable)", "format": "PDF/email", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Threshold definitions per system / risk tier", "format": "Reference doc", "frequency": "At fieldwork" }
+    ],
+    "retention_period": "Lifetime of model + 7 years post-retirement (regulated); + 3 years (otherwise)"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["8.3", "9.1"],
+    "nist_ai_rmf": ["MEASURE-1.1", "MEASURE-2.1", "MEASURE-2.7"],
+    "eu_ai_act": ["Article 15", "Annex IV"],
+    "owasp_dsgai": ["DSGAI18"]
+  },
+  "related_controls": ["AI-CTRL-003", "AI-CTRL-010", "AI-CTRL-011", "AI-CTRL-014"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "NIST AI RMF — MEASURE function", "url": "https://www.nist.gov/itl/ai-risk-management-framework" },
+    { "title": "EU AI Act Annex IV — Technical documentation", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" },
+    { "title": "ISO/IEC 42001:2023, clause 9.1", "url": "https://www.iso.org/standard/81230.html" }
+  ]
+}

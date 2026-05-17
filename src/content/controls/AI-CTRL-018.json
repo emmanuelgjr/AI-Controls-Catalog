@@ -1,0 +1,85 @@
+{
+  "id": "AI-CTRL-018",
+  "version": "1.0.0",
+  "title": "AI System Decommissioning",
+  "category": "Model Lifecycle",
+  "control_type": "corrective",
+  "lifecycle_stage": ["Retirement"],
+  "risk_domain": ["Model", "Data"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Traditional ML", "Computer Vision", "Generative AI", "Multi-modal", "Recommender"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid", "Edge", "Embedded"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "GDPR", "Banking"],
+    "company_size": ["MidMarket", "Enterprise"]
+  },
+  "objective": "Ensure that AI system decommissioning follows a documented procedure addressing dependent system continuity, data retention/deletion, model artifact handling, vendor termination assistance, documentation preservation, and stakeholder communication.",
+  "rationale": "Decommissioning is the lifecycle stage most often skipped or fudged. Live but unused models accumulate as risk surface (drift, regulatory exposure, third-party dependencies). Personal data embedded in model weights or vector stores requires explicit handling under GDPR/PIPEDA. EU AI Act Article 11 implicitly requires lifecycle traceability through retirement. A documented decommissioning process closes the lifecycle and preserves audit evidence.",
+  "control_narrative": "The organization maintains an AI Decommissioning standard requiring, for each retirement: dependent-system impact analysis (which systems consume outputs of this one); successor system or alternative process plan; data retention/deletion per AI-CTRL-015; model artifact handling (archive or destruction with method documented); vendor termination assistance and deletion certificates; documentation preservation (Model Card, Datasheet, evaluation history archived); inventory status change to 'Retired' with date; stakeholder communication (internal users, customers, regulators where applicable). Decommissioning is signed off by the AI Governance lead and the business owner. For EU AI Act high-risk systems, decommissioning records are retained 10 years.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the AI Decommissioning standard and confirm coverage of required activities.",
+      "Confirm sign-off authority and post-decommissioning record retention.",
+      "Confirm integration with AI-CTRL-001 (inventory status), AI-CTRL-002 (data provenance), AI-CTRL-015 (retention), AI-CTRL-004 (vendor).",
+      "Confirm stakeholder communication requirements."
+    ],
+    "inquiries": [
+      "Who triggers a decommissioning?",
+      "How are dependent-system impacts identified?",
+      "How are vendor deletion certificates obtained and stored?",
+      "How are model artifacts archived vs destroyed?"
+    ],
+    "inspections": [
+      "AI Decommissioning standard.",
+      "Sample decommissioning records.",
+      "Inventory status change history."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "For the audit period, obtain the population of AI systems decommissioned.",
+      "For a sample, confirm decommissioning records are complete per the standard.",
+      "Confirm inventory status was updated.",
+      "Confirm data deletion / archival per the standard and AI-CTRL-015.",
+      "Confirm vendor termination assistance and deletion certificates obtained.",
+      "Confirm dependent-system impact analysis was performed and addressed.",
+      "Confirm sign-off authority matches the standard."
+    ],
+    "sample_size_guidance": {
+      "population_type": "AI systems decommissioned in audit period",
+      "low_risk": "All decommissions up to 5; otherwise 5",
+      "moderate_risk": "10 decommissions",
+      "high_risk": "All decommissions or 100% of EU AI Act high-risk"
+    }
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "AI Decommissioning standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Decommissioning records for sampled systems", "format": "PDF/Workflow", "frequency": "Per sample" },
+      { "item": "Inventory status change records", "format": "System export", "frequency": "Per sample" },
+      { "item": "Deletion certificates and archive records", "format": "PDF/system", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Stakeholder communications", "format": "Email/portal", "frequency": "Per sample" }
+    ],
+    "retention_period": "10 years (EU AI Act high-risk); 7 years (regulated); 3 years (otherwise)"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["8.3", "8.4"],
+    "nist_ai_rmf": ["MANAGE-2.3", "MANAGE-4.3"],
+    "eu_ai_act": ["Article 11"],
+    "owasp_dsgai": ["DSGAI19"]
+  },
+  "related_controls": ["AI-CTRL-001", "AI-CTRL-002", "AI-CTRL-015"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "ISO/IEC 42001:2023, clause 8.3", "url": "https://www.iso.org/standard/81230.html" },
+    { "title": "NIST AI RMF — MANAGE function", "url": "https://www.nist.gov/itl/ai-risk-management-framework" },
+    { "title": "EU AI Act Article 11 — Technical documentation lifecycle", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" }
+  ]
+}

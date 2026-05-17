@@ -1,0 +1,88 @@
+{
+  "id": "AI-CTRL-005",
+  "version": "1.0.0",
+  "title": "AI Risk Assessment and Impact Assessment",
+  "category": "AI Risk Management",
+  "control_type": "directive",
+  "lifecycle_stage": ["Strategy & Planning", "Evaluation & Testing", "Deployment"],
+  "risk_domain": ["Governance", "Model", "Data"],
+  "applicability": {
+    "ai_types": ["LLM", "Agentic AI", "Traditional ML", "Computer Vision", "Generative AI", "Multi-modal", "Recommender"],
+    "deployment_models": ["SaaS", "Self-hosted", "Hybrid", "Edge", "Embedded"],
+    "regulatory_regimes": ["EU AI Act", "ISO 42001", "ISO 23894", "ISO 42005", "NIST AI RMF"],
+    "company_size": ["SMB", "MidMarket", "Enterprise"]
+  },
+  "objective": "Ensure that each AI system is subject to a documented risk assessment and AI System Impact Assessment (AIIA) aligned with ISO/IEC 23894 and ISO/IEC 42005, completed prior to production deployment and refreshed on material change or annually.",
+  "rationale": "EU AI Act, ISO/IEC 42001, and NIST AI RMF all require AI-specific risk treatment — generic enterprise risk frameworks miss model-specific risks (hallucination, drift, prompt injection, fairness, autonomy). A structured AIIA per ISO/IEC 42005 surfaces stakeholder, misuse, fairness, transparency, oversight, and lifecycle considerations that conventional ERM does not. Without this assessment, residual risks are unmeasured and treatment is undocumented.",
+  "control_narrative": "Each AI system completes a two-stage assessment before production: (1) an AI Risk Assessment identifying threats, vulnerabilities, likelihood, and impact across the model lifecycle, aligned with ISO/IEC 23894; and (2) an AI System Impact Assessment (AIIA) aligned with ISO/IEC 42005 Annex A covering purpose, stakeholders, data, foreseeable misuse, fairness, transparency, oversight, robustness, environmental and social impact, and lifecycle considerations. The AIIA is signed off by the AI Governance lead and the business owner. Findings feed the AI Risk Register; treatment plans drive remediation. Reassessment is triggered by material change (model version, expanded scope, new data sources, new geography) or at minimum annually.",
+  "test_of_design": {
+    "procedures": [
+      "Obtain the AI Risk Assessment and AIIA standards and confirm coverage of ISO/IEC 23894 risk-management concepts and ISO/IEC 42005 Annex A topics.",
+      "Confirm policy requires both assessments to be completed before production deployment.",
+      "Confirm trigger criteria for re-assessment (material change list, annual minimum).",
+      "Confirm sign-off requirements (AI Governance + business owner; Legal/Privacy for personal-data-processing systems).",
+      "Confirm linkage from AIIA findings to the AI Risk Register and to controls applied."
+    ],
+    "inquiries": [
+      "Who facilitates the AIIA workshop or process?",
+      "How are stakeholder-impact considerations gathered for systems whose users are external customers or the public?",
+      "How are 'foreseeable misuse' scenarios identified and validated?",
+      "What happens if the assessment cannot be completed in time for the planned deployment date?"
+    ],
+    "inspections": [
+      "AI Risk Assessment and AIIA standards.",
+      "AIIA template aligned to ISO/IEC 42005.",
+      "Sign-off workflow and approval records.",
+      "Sample of completed AIIA reports."
+    ]
+  },
+  "test_of_operating_effectiveness": {
+    "procedures": [
+      "From the AI System Inventory, select a sample of AI systems newly deployed to production in the audit period.",
+      "For each sampled system, confirm an AI Risk Assessment and AIIA were completed prior to production deployment.",
+      "Inspect the AIIA and confirm all ISO/IEC 42005 Annex A topics are addressed substantively (not boilerplate).",
+      "Confirm sign-off by AI Governance and business owner with date pre-dating deployment.",
+      "Trace 3 AIIA findings to entries in the AI Risk Register and confirm treatment plans with owners and target dates.",
+      "For systems that experienced a material change in the audit period, confirm re-assessment occurred."
+    ],
+    "sample_size_guidance": {
+      "population_type": "AI systems newly deployed or materially changed in audit period",
+      "low_risk": "5 systems",
+      "moderate_risk": "10 systems",
+      "high_risk": "25 systems or 100% of EU AI Act high-risk classifications"
+    }
+  },
+  "evidence_requirements": {
+    "required": [
+      { "item": "AI Risk Assessment standard", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "AIIA standard and template (ISO/IEC 42005-aligned)", "format": "PDF/Word", "frequency": "At fieldwork" },
+      { "item": "Completed AIIA reports for sampled systems", "format": "PDF/Word", "frequency": "Per sample" },
+      { "item": "Sign-off records", "format": "System / email", "frequency": "Per sample" },
+      { "item": "Risk Register entries traced from AIIA findings", "format": "Excel/system export", "frequency": "Per sample" }
+    ],
+    "supporting": [
+      { "item": "Material-change re-assessment records", "format": "PDF/Word", "frequency": "Per change" }
+    ],
+    "retention_period": "Lifetime of the AI system + 7 years after retirement (regulated); + 3 years (otherwise)"
+  },
+  "framework_mappings": {
+    "iso_iec_42001": ["6.1", "6.2", "8.3"],
+    "nist_ai_rmf": ["MAP-1.1", "MAP-3.1", "MAP-5.1", "MEASURE-1.1"],
+    "eu_ai_act": ["Article 9", "Article 27"],
+    "owasp_dsgai": ["DSGAI02"]
+  },
+  "related_controls": ["AI-CTRL-001", "AI-CTRL-003", "AI-CTRL-009"],
+  "author": "Emmanuel Guilherme Jr.",
+  "reviewed_by": [],
+  "created": "2026-05-01",
+  "last_reviewed": "2026-05-01",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-05-01", "change": "Initial publication." }
+  ],
+  "references": [
+    { "title": "ISO/IEC 23894:2023 — AI risk management", "url": "https://www.iso.org/standard/77304.html" },
+    { "title": "ISO/IEC 42005 — AI system impact assessment", "url": "https://www.iso.org/standard/44545.html" },
+    { "title": "NIST AI RMF — MAP function", "url": "https://www.nist.gov/itl/ai-risk-management-framework" },
+    { "title": "EU AI Act Article 27 — Fundamental rights impact assessment", "url": "https://eur-lex.europa.eu/eli/reg/2024/1689" }
+  ]
+}
