@@ -11,7 +11,7 @@ interface Props {
 
 export default function ExportButtons({ control }: Props) {
   const [copied, setCopied] = useState(false);
-  const citation = `Guilherme Jr., E. (${new Date(control.last_reviewed).getFullYear()}). AI Controls Catalog — ${control.id} ${control.title} (Version ${control.version}). https://aicontrolscatalog.dev/controls/${control.id}`;
+  const citation = `Guilherme Jr., E. (${new Date(control.last_reviewed).getFullYear()}). AI Controls Catalog — ${control.id} ${control.title} (Version ${control.version}). https://emmanuelgjr.github.io/AI-Controls-Catalog/controls/${control.id}`;
 
   const copyCitation = async () => {
     try {
