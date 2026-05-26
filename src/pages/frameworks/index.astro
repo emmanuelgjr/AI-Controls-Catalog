@@ -43,7 +43,7 @@ for (const [k, v] of Object.entries(counts)) slugCounts[keyMap[k] ?? k] = v;
     <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
       {frameworks.map((f) => (
         <li>
-          <a href={`/frameworks/${f.slug}`} class="card-interactive block h-full">
+          <a href={`${import.meta.env.BASE_URL}frameworks/${f.slug}`} class="card-interactive block h-full">
             <div class="flex items-start justify-between gap-3 mb-2">
               <span class="inline-flex items-center gap-2">
                 <span class="inline-block w-3 h-3 rounded-full" style={`background:${f.color_mark}`}></span>

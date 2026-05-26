@@ -31,7 +31,7 @@ const matches = allControls.filter((c) => c.lifecycle_stage.includes(stageName a
   description={`${matches.length} AI controls relevant to the ${stageName} lifecycle stage.`}
 >
   <section class="max-w-content mx-auto px-6 lg:px-8 py-12">
-    <a href="/lifecycle" class="text-sm text-ink-500 hover:text-accent-700">← All lifecycle stages</a>
+    <a href={`${import.meta.env.BASE_URL}lifecycle`} class="text-sm text-ink-500 hover:text-accent-700">← All lifecycle stages</a>
     <p class="mt-3 text-sm font-medium text-accent-700">Lifecycle</p>
     <h1 class="font-display font-semibold text-3xl md:text-4xl tracking-tight text-ink-900 mt-2">{stageName}</h1>
     <p class="mt-3 text-ink-600">{matches.length} controls apply at this stage.</p>

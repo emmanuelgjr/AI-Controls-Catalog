@@ -181,7 +181,7 @@ export default function ControlsExplorer({ controls }: Props) {
             {filtered.map((c) => (
               <li key={c.id}>
                 <a
-                  href={`/controls/${c.id}`}
+                  href={`${import.meta.env.BASE_URL}controls/${c.id}`}
                   className="card-interactive block h-full focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 rounded-lg"
                 >
                   <p className="font-mono text-xs text-ink-500">{c.id}</p>

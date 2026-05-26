@@ -5,7 +5,8 @@ import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
-  site: 'https://aicontrolscatalog.dev',
+  site: 'https://emmanuelgjr.github.io',
+  base: '/AI-Controls-Catalog/',
   output: 'static',
   integrations: [
     tailwind({ applyBaseStyles: false }),

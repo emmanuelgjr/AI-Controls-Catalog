@@ -28,7 +28,7 @@ const slugify = (s: string) =>
     <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
       {domains.map((d) => (
         <li>
-          <a href={`/risk-domains/${slugify(d)}`} class="card-interactive block">
+          <a href={`${import.meta.env.BASE_URL}risk-domains/${slugify(d)}`} class="card-interactive block">
             <h2 class="font-semibold text-ink-900">{d}</h2>
             <p class="text-sm text-ink-500 mt-1">{counts[d]} controls</p>
           </a>

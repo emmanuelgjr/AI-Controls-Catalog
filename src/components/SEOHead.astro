@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { title, description, canonical, ogType = 'website', ogImage, structuredData } = Astro.props;
-const ogImageUrl = ogImage ?? new URL('/og-image.png', Astro.site).toString();
+const ogImageUrl = ogImage ?? new URL(`${import.meta.env.BASE_URL}og-image.png`, Astro.site).toString();
 ---
 
 <meta charset="utf-8" />
@@ -32,8 +32,8 @@ const ogImageUrl = ogImage ?? new URL('/og-image.png', Astro.site).toString();
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImageUrl} />
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+<link rel="sitemap" href={`${import.meta.env.BASE_URL}sitemap-index.xml`} />
 
 {structuredData && (
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

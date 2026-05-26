@@ -31,7 +31,7 @@ entries.sort((a, b) => (a.date < b.date ? 1 : -1));
       {entries.map((e) => (
         <li class="py-4 grid sm:grid-cols-[100px_120px_1fr] gap-2 sm:gap-6 text-sm">
           <time class="font-mono text-ink-500">{e.date}</time>
-          <a href={`/controls/${e.id}`} class="font-mono text-accent-700 hover:underline">{e.id} v{e.version}</a>
+          <a href={`${import.meta.env.BASE_URL}controls/${e.id}`} class="font-mono text-accent-700 hover:underline">{e.id} v{e.version}</a>
           <p class="text-ink-700"><strong class="text-ink-900">{e.title}.</strong> {e.change}</p>
         </li>
       ))}

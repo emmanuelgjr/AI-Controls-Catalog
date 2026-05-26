@@ -1,5 +1,6 @@
 ---
 const year = new Date().getFullYear();
+const base = import.meta.env.BASE_URL;
 ---
 
 <footer class="border-t border-ink-200 bg-ink-50 mt-16">
@@ -15,19 +16,19 @@ const year = new Date().getFullYear();
     <div>
       <p class="text-xs font-semibold uppercase tracking-wide text-ink-500">Browse</p>
       <ul class="mt-3 space-y-2 text-sm">
-        <li><a href="/controls" class="text-ink-700 hover:text-accent-700">All controls</a></li>
-        <li><a href="/frameworks" class="text-ink-700 hover:text-accent-700">Frameworks</a></li>
-        <li><a href="/lifecycle" class="text-ink-700 hover:text-accent-700">Lifecycle</a></li>
-        <li><a href="/risk-domains" class="text-ink-700 hover:text-accent-700">Risk domains</a></li>
+        <li><a href={`${base}controls`} class="text-ink-700 hover:text-accent-700">All controls</a></li>
+        <li><a href={`${base}frameworks`} class="text-ink-700 hover:text-accent-700">Frameworks</a></li>
+        <li><a href={`${base}lifecycle`} class="text-ink-700 hover:text-accent-700">Lifecycle</a></li>
+        <li><a href={`${base}risk-domains`} class="text-ink-700 hover:text-accent-700">Risk domains</a></li>
       </ul>
     </div>
     <div>
       <p class="text-xs font-semibold uppercase tracking-wide text-ink-500">Project</p>
       <ul class="mt-3 space-y-2 text-sm">
-        <li><a href="/methodology" class="text-ink-700 hover:text-accent-700">Methodology</a></li>
-        <li><a href="/contribute" class="text-ink-700 hover:text-accent-700">Contribute</a></li>
-        <li><a href="/changelog" class="text-ink-700 hover:text-accent-700">Changelog</a></li>
-        <li><a href="/about" class="text-ink-700 hover:text-accent-700">About</a></li>
+        <li><a href={`${base}methodology`} class="text-ink-700 hover:text-accent-700">Methodology</a></li>
+        <li><a href={`${base}contribute`} class="text-ink-700 hover:text-accent-700">Contribute</a></li>
+        <li><a href={`${base}changelog`} class="text-ink-700 hover:text-accent-700">Changelog</a></li>
+        <li><a href={`${base}about`} class="text-ink-700 hover:text-accent-700">About</a></li>
       </ul>
     </div>
   </div>
@@ -36,7 +37,7 @@ const year = new Date().getFullYear();
       <span>© {year} Emmanuel Guilherme Jr. · Code MIT · Content CC-BY 4.0</span>
       <span>
         Part of the
-        <a href="/about" class="underline hover:text-accent-700">four-repo AI security portfolio</a>.
+        <a href={`${base}about`} class="underline hover:text-accent-700">four-repo AI security portfolio</a>.
       </span>
     </div>
   </div>

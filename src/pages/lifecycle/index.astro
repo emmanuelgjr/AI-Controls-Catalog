@@ -37,7 +37,7 @@ const slugify = (s: string) =>
     <ol class="mt-10 space-y-3 max-w-2xl">
       {stages.map((s, i) => (
         <li>
-          <a href={`/lifecycle/${slugify(s)}`} class="card-interactive flex items-center justify-between">
+          <a href={`${import.meta.env.BASE_URL}lifecycle/${slugify(s)}`} class="card-interactive flex items-center justify-between">
             <span>
               <span class="font-mono text-xs text-ink-500">{String(i + 1).padStart(2, '0')}</span>
               <span class="ml-3 font-medium text-ink-900">{s}</span>

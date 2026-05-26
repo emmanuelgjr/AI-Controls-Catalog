@@ -1,18 +1,20 @@
 ---
+const base = import.meta.env.BASE_URL;
 const links = [
-  { href: '/controls', label: 'Controls' },
-  { href: '/frameworks', label: 'Frameworks' },
-  { href: '/lifecycle', label: 'Lifecycle' },
-  { href: '/risk-domains', label: 'Risk' },
-  { href: '/methodology', label: 'Methodology' },
-  { href: '/about', label: 'About' },
+  { href: `${base}controls`, label: 'Controls' },
+  { href: `${base}scope`, label: 'Scope' },
+  { href: `${base}frameworks`, label: 'Frameworks' },
+  { href: `${base}lifecycle`, label: 'Lifecycle' },
+  { href: `${base}risk-domains`, label: 'Risk' },
+  { href: `${base}methodology`, label: 'Methodology' },
+  { href: `${base}about`, label: 'About' },
 ];
 const pathname = Astro.url.pathname;
 ---
 
 <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-ink-200">
   <div class="max-w-content mx-auto px-6 lg:px-8 flex items-center justify-between h-16">
-    <a href="/" class="flex items-center gap-2 font-semibold text-ink-900">
+    <a href={base} class="flex items-center gap-2 font-semibold text-ink-900">
       <span class="text-accent-700">AI</span>
       <span>Controls Catalog</span>
     </a>
