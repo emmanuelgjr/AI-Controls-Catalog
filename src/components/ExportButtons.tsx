@@ -2,6 +2,7 @@ import { Download, FileText, Copy, Check } from 'lucide-react';
 import { useState } from 'react';
 import type { Control } from '../content/config';
 import { downloadPdf } from '../lib/exports/pdf';
+import { downloadWord } from '../lib/exports/word';
 import { downloadCsv } from '../lib/exports/csv';
 
 interface Props {
@@ -38,6 +39,9 @@ export default function ExportButtons({ control }: Props) {
     <div className="space-y-2">
       <button onClick={() => downloadPdf(control)} className="btn btn-primary btn-sm w-full">
         <Download size={14} /> PDF
+      </button>
+      <button onClick={() => downloadWord(control)} className="btn btn-primary btn-sm w-full">
+        <Download size={14} /> Word
       </button>
       <button onClick={() => downloadCsv([control])} className="btn btn-secondary btn-sm w-full">
         <FileText size={14} /> CSV

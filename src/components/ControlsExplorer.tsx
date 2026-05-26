@@ -4,6 +4,7 @@ import Fuse from 'fuse.js';
 import type { Control } from '../content/config';
 import { filterControls, emptyFilterState, type FilterState } from '../lib/filters';
 import { downloadCsv } from '../lib/exports/csv';
+import { downloadRcmExcel } from '../lib/exports/rcm-excel';
 
 interface Props {
   controls: Control[];
@@ -157,6 +158,14 @@ export default function ControlsExplorer({ controls }: Props) {
             {filtered.length === 1 ? '' : 's'}
           </p>
           <div className="flex gap-2">
+            <button
+              onClick={() => downloadRcmExcel(filtered)}
+              className="btn btn-primary btn-sm"
+              disabled={filtered.length === 0}
+              aria-label="Export current view to RCM Excel"
+            >
+              <Download size={14} /> RCM Excel
+            </button>
             <button
               onClick={() => downloadCsv(filtered)}
               className="btn btn-secondary btn-sm"
