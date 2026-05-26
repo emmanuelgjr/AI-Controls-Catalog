@@ -75,7 +75,11 @@
     "eu_ai_act": ["Article 15", "Article 50"],
     "owasp_llm_top_10": ["LLM02:2025", "LLM06:2025"],
     "owasp_agentic_top_10": ["AAI02"],
-    "owasp_dsgai": ["DSGAI11", "DSGAI12"]
+    "owasp_dsgai": ["DSGAI11", "DSGAI12"],
+    "soc_2": ["CC6.1", "CC7.2"],
+    "mitre_atlas": ["AML.T0048", "AML.T0051"],
+    "osfi_e21": ["Principle 4"],
+    "nydfs_500": ["500.15"]
   },
   "related_controls": ["AI-CTRL-003", "AI-CTRL-013", "AI-CTRL-019"],
   "author": "Emmanuel Guilherme Jr.",

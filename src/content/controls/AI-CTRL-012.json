@@ -65,7 +65,8 @@
     "iso_iec_42001": ["7.5", "8.4"],
     "nist_ai_rmf": ["MAP-4.1", "MEASURE-2.8"],
     "eu_ai_act": ["Article 11", "Annex IV"],
-    "owasp_dsgai": ["DSGAI14"]
+    "owasp_dsgai": ["DSGAI14"],
+    "soc_2": ["CC1.4"]
   },
   "related_controls": ["AI-CTRL-002", "AI-CTRL-011", "AI-CTRL-017"],
   "author": "Emmanuel Guilherme Jr.",

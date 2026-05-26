@@ -79,7 +79,11 @@
     "nist_ai_rmf": ["MAP-2.3", "MAP-4.1", "MEASURE-2.10", "MEASURE-2.11"],
     "eu_ai_act": ["Article 10", "Article 11", "Article 12"],
     "owasp_dsgai": ["DSGAI03", "DSGAI04", "DSGAI05"],
-    "owasp_llm_top_10": ["LLM03:2025"]
+    "owasp_llm_top_10": ["LLM03:2025"],
+    "soc_2": ["CC6.1", "CC6.5"],
+    "mitre_atlas": ["AML.T0020"],
+    "osfi_e21": ["Principle 2"],
+    "nydfs_500": ["500.13", "500.15"]
   },
   "related_controls": ["AI-CTRL-001", "AI-CTRL-013", "AI-CTRL-015"],
   "author": "Emmanuel Guilherme Jr.",

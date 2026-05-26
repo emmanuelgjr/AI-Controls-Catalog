@@ -71,8 +71,10 @@
     "nist_ai_rmf": ["MANAGE-2.3", "MANAGE-4.3"],
     "eu_ai_act": ["Article 73"],
     "owasp_llm_top_10": ["LLM10:2025"],
+    "soc_2": ["CC7.3", "CC7.4", "CC7.5"],
     "nist_csf": ["RS.RP-1", "RS.AN-1", "RS.MI-1", "RC.RP-1"],
-    "osfi_e21": ["Principle 5"]
+    "osfi_e21": ["Principle 5"],
+    "nydfs_500": ["500.16", "500.17"]
   },
   "related_controls": ["AI-CTRL-008", "AI-CTRL-003"],
   "author": "Emmanuel Guilherme Jr.",

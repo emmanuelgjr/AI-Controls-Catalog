@@ -73,7 +73,9 @@
     "iso_iec_42001": ["8.2", "8.3"],
     "nist_ai_rmf": ["GOVERN-3.2", "MAP-5.2", "MEASURE-3.3"],
     "eu_ai_act": ["Article 14"],
-    "owasp_agentic_top_10": ["AAI04"]
+    "owasp_agentic_top_10": ["AAI04"],
+    "soc_2": ["CC1.3", "CC1.4"],
+    "nydfs_500": ["500.04"]
   },
   "related_controls": ["AI-CTRL-005", "AI-CTRL-007", "AI-CTRL-019"],
   "author": "Emmanuel Guilherme Jr.",

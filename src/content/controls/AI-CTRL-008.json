@@ -69,7 +69,10 @@
     "nist_ai_rmf": ["MANAGE-4.1", "MANAGE-4.2", "MEASURE-2.6"],
     "eu_ai_act": ["Article 12", "Article 19"],
     "owasp_llm_top_10": ["LLM10:2025"],
-    "soc_2": ["CC7.2"],
+    "soc_2": ["CC7.1", "CC7.2"],
+    "mitre_atlas": ["AML.T0048"],
+    "osfi_e21": ["Principle 4"],
+    "nydfs_500": ["500.06", "500.14"],
     "nist_csf": ["DE.CM-1", "DE.CM-7"]
   },
   "related_controls": ["AI-CTRL-003", "AI-CTRL-009", "AI-CTRL-020"],

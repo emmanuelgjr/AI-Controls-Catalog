@@ -71,6 +71,10 @@
     "nist_ai_rmf": ["GOVERN-4.1", "MANAGE-2.2", "MANAGE-4.1"],
     "eu_ai_act": ["Article 4"],
     "owasp_dsgai": ["DSGAI20", "DSGAI21"],
+    "soc_2": ["CC6.6", "CC6.7", "CC7.1"],
+    "mitre_atlas": ["AML.T0010"],
+    "osfi_e21": ["Principle 1", "Principle 4"],
+    "nydfs_500": ["500.02", "500.14"],
     "nist_csf": ["DE.CM-3", "DE.CM-7", "RS.AN-1"]
   },
   "related_controls": ["AI-CTRL-001", "AI-CTRL-016", "AI-CTRL-009"],

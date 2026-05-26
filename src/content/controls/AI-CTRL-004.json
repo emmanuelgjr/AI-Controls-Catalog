@@ -79,7 +79,9 @@
     "eu_ai_act": ["Article 25", "Article 26", "Article 28"],
     "owasp_dsgai": ["DSGAI06", "DSGAI07"],
     "soc_2": ["CC9.2"],
-    "osfi_e21": ["Principle 3"]
+    "mitre_atlas": ["AML.T0010"],
+    "osfi_e21": ["Principle 3"],
+    "nydfs_500": ["500.11"]
   },
   "related_controls": ["AI-CTRL-001", "AI-CTRL-005", "AI-CTRL-013"],
   "author": "Emmanuel Guilherme Jr.",

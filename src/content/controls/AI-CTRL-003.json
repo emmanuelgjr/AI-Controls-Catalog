@@ -81,7 +81,10 @@
     "owasp_llm_top_10": ["LLM01:2025", "LLM02:2025", "LLM06:2025"],
     "owasp_agentic_top_10": ["AAI01", "AAI03"],
     "owasp_dsgai": ["DSGAI09", "DSGAI10"],
-    "mitre_atlas": ["AML.T0051", "AML.T0054", "AML.T0067"]
+    "mitre_atlas": ["AML.T0051", "AML.T0054", "AML.T0067"],
+    "soc_2": ["CC7.1", "CC7.2"],
+    "osfi_e21": ["Principle 4"],
+    "nydfs_500": ["500.05"]
   },
   "related_controls": ["AI-CTRL-001", "AI-CTRL-014", "AI-CTRL-007"],
   "author": "Emmanuel Guilherme Jr.",
