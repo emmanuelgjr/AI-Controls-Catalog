@@ -24,7 +24,7 @@
     "docx": "^9.0.0",
     "exceljs": "^4.4.0",
     "fuse.js": "^7.0.0",
-    "jspdf": "^2.5.2",
+    "jspdf": "^4.2.1",
     "lucide-react": "^0.453.0",
     "papaparse": "^5.4.1",
     "react": "^18.3.1",
@@ -45,6 +45,10 @@
     "prettier-plugin-astro": "^0.14.1",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2",
-    "vitest": "^2.1.2"
+    "vitest": "^4.1.8"
+  },
+  "overrides": {
+    "uuid": "^11.1.1",
+    "dompurify": "^3.4.8"
   }
 }

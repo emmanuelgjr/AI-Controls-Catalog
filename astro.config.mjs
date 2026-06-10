@@ -19,7 +19,7 @@ export default defineConfig({
   },
   vite: {
     ssr: {
-      noExternal: ['docx', 'jspdf', 'exceljs', 'uuid'],
+      noExternal: ['docx', 'jspdf', 'exceljs', 'uuid', 'fflate'],
     },
   },
 });
