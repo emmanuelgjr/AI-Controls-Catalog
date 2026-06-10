@@ -1,5 +1,5 @@
-import ExcelJS from 'exceljs';
-import type { Control } from '../../content/config';
+﻿import ExcelJS from 'exceljs';
+import type { Control } from '../../content/schemas';
 
 const ACCENT = '0F766E';
 const HEADER_FILL: ExcelJS.FillPattern = {
@@ -29,10 +29,10 @@ const FRAMEWORK_KEYS = [
 ] as const;
 
 function addTitle(ws: ExcelJS.Worksheet, title: string, colCount: number) {
-  const row = ws.addRow([`AI Controls Catalog — ${title}`]);
+  const row = ws.addRow([`AI Controls Catalog â€” ${title}`]);
   row.font = { bold: true, size: 12, color: { argb: `FF${ACCENT}` } };
   ws.mergeCells(1, 1, 1, Math.min(colCount, 8));
-  const dateRow = ws.addRow([`Exported ${new Date().toISOString().split('T')[0]} · CC-BY 4.0`]);
+  const dateRow = ws.addRow([`Exported ${new Date().toISOString().split('T')[0]} Â· CC-BY 4.0`]);
   dateRow.font = META_FONT;
   ws.addRow([]);
 }
@@ -61,7 +61,7 @@ function fmJoin(fm: Control['framework_mappings'], key: string): string {
 function buildSummary(wb: ExcelJS.Workbook, controls: Control[]) {
   const ws = wb.addWorksheet('RCM Summary');
   const cols = ['ID', 'Title', 'Category', 'Type', 'Objective', 'Risk Domains', 'Lifecycle Stages', 'AI Types', 'Deployment', 'Company Size', 'Regulatory Regimes', 'Frameworks'];
-  addTitle(ws, 'Risk Control Matrix — Summary', cols.length);
+  addTitle(ws, 'Risk Control Matrix â€” Summary', cols.length);
 
   const header = ws.addRow(cols);
   styleHeader(header);
@@ -101,7 +101,7 @@ function buildSummary(wb: ExcelJS.Workbook, controls: Control[]) {
 function buildTestProcedures(wb: ExcelJS.Workbook, controls: Control[]) {
   const ws = wb.addWorksheet('Test Procedures');
   const cols = ['ID', 'Title', 'ToD Procedures', 'ToD Inquiries', 'ToD Inspections', 'ToOE Procedures', 'Reperformance', 'Pop. Type', 'Low Risk', 'Mod Risk', 'High Risk'];
-  addTitle(ws, 'Risk Control Matrix — Test Procedures', cols.length);
+  addTitle(ws, 'Risk Control Matrix â€” Test Procedures', cols.length);
 
   const header = ws.addRow(cols);
   styleHeader(header);
@@ -135,7 +135,7 @@ function buildTestProcedures(wb: ExcelJS.Workbook, controls: Control[]) {
 function buildEvidence(wb: ExcelJS.Workbook, controls: Control[]) {
   const ws = wb.addWorksheet('Evidence');
   const cols = ['ID', 'Title', 'Evidence Item', 'Format', 'Frequency', 'Type', 'Retention'];
-  addTitle(ws, 'Risk Control Matrix — Evidence Requirements', cols.length);
+  addTitle(ws, 'Risk Control Matrix â€” Evidence Requirements', cols.length);
 
   const header = ws.addRow(cols);
   styleHeader(header);
@@ -163,7 +163,7 @@ function buildEvidence(wb: ExcelJS.Workbook, controls: Control[]) {
 function buildFrameworkMap(wb: ExcelJS.Workbook, controls: Control[]) {
   const ws = wb.addWorksheet('Framework Map');
   const cols = ['ID', 'Title', ...FRAMEWORK_KEYS.map(([, label]) => label)];
-  addTitle(ws, 'Risk Control Matrix — Framework Mappings', cols.length);
+  addTitle(ws, 'Risk Control Matrix â€” Framework Mappings', cols.length);
 
   const header = ws.addRow(cols);
   styleHeader(header);

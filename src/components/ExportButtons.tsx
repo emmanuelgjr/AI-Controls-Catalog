@@ -1,6 +1,6 @@
-import { Download, FileText, Copy, Check } from 'lucide-react';
+﻿import { Download, FileText, Copy, Check } from 'lucide-react';
 import { useState } from 'react';
-import type { Control } from '../content/config';
+import type { Control } from '../content/schemas';
 import { downloadPdf } from '../lib/exports/pdf';
 import { downloadWord } from '../lib/exports/word';
 import { downloadCsv } from '../lib/exports/csv';
@@ -11,7 +11,7 @@ interface Props {
 
 export default function ExportButtons({ control }: Props) {
   const [copied, setCopied] = useState(false);
-  const citation = `Guilherme Jr., E. (${new Date(control.last_reviewed).getFullYear()}). AI Controls Catalog — ${control.id} ${control.title} (Version ${control.version}). https://emmanuelgjr.github.io/AI-Controls-Catalog/controls/${control.id}`;
+  const citation = `Guilherme Jr., E. (${new Date(control.last_reviewed).getFullYear()}). AI Controls Catalog â€” ${control.id} ${control.title} (Version ${control.version}). https://emmanuelgjr.github.io/AI-Controls-Catalog/controls/${control.id}`;
 
   const copyCitation = async () => {
     try {

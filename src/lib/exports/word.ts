@@ -1,9 +1,9 @@
-import {
+﻿import {
   Document, Packer, Paragraph, TextRun, HeadingLevel,
   Table, TableRow, TableCell, WidthType, BorderStyle,
   AlignmentType, Footer, PageNumber, NumberFormat,
 } from 'docx';
-import type { Control } from '../../content/config';
+import type { Control } from '../../content/schemas';
 
 const ACCENT = '0F766E';
 
@@ -31,7 +31,7 @@ function numberedList(items: string[]) {
 function bulletList(items: string[]) {
   return items.map((item) =>
     new Paragraph({
-      children: [new TextRun({ text: `• ${item}`, size: 20 })],
+      children: [new TextRun({ text: `â€¢ ${item}`, size: 20 })],
       spacing: { after: 60 },
       indent: { left: 360 },
     }),
@@ -63,7 +63,7 @@ export function wordExportSingle(control: Control): Document {
 
   const doc = new Document({
     creator: 'AI Controls Catalog',
-    title: `${control.id} — ${control.title}`,
+    title: `${control.id} â€” ${control.title}`,
     description: control.objective,
     sections: [{
       properties: {
@@ -77,9 +77,9 @@ export function wordExportSingle(control: Control): Document {
             new Paragraph({
               alignment: AlignmentType.CENTER,
               children: [
-                new TextRun({ text: `${control.id} · v${control.version} · Page `, size: 16, color: '94A3B8' }),
+                new TextRun({ text: `${control.id} Â· v${control.version} Â· Page `, size: 16, color: '94A3B8' }),
                 new TextRun({ children: [PageNumber.CURRENT], size: 16, color: '94A3B8' }),
-                new TextRun({ text: ` · CC-BY 4.0 · AI Controls Catalog`, size: 16, color: '94A3B8' }),
+                new TextRun({ text: ` Â· CC-BY 4.0 Â· AI Controls Catalog`, size: 16, color: '94A3B8' }),
               ],
             }),
           ],
@@ -92,14 +92,14 @@ export function wordExportSingle(control: Control): Document {
         }),
 
         new Paragraph({
-          text: `${control.id} — ${control.title}`,
+          text: `${control.id} â€” ${control.title}`,
           heading: HeadingLevel.HEADING_1,
           spacing: { after: 80 },
         }),
 
         new Paragraph({
           children: [
-            new TextRun({ text: `Version ${control.version} · ${control.category} · ${control.control_type} · Last reviewed ${control.last_reviewed}`, size: 18, color: '64748B' }),
+            new TextRun({ text: `Version ${control.version} Â· ${control.category} Â· ${control.control_type} Â· Last reviewed ${control.last_reviewed}`, size: 18, color: '64748B' }),
           ],
           spacing: { after: 240 },
         }),
@@ -131,15 +131,15 @@ export function wordExportSingle(control: Control): Document {
         body(control.control_narrative),
 
         // Test of Design
-        heading('Test of Design — Procedures'),
+        heading('Test of Design â€” Procedures'),
         ...numberedList(control.test_of_design.procedures),
-        heading('Test of Design — Inquiries'),
+        heading('Test of Design â€” Inquiries'),
         ...bulletList(control.test_of_design.inquiries),
-        heading('Test of Design — Inspections'),
+        heading('Test of Design â€” Inspections'),
         ...bulletList(control.test_of_design.inspections),
 
         // Test of Operating Effectiveness
-        heading('Test of Operating Effectiveness — Procedures'),
+        heading('Test of Operating Effectiveness â€” Procedures'),
         ...numberedList(control.test_of_operating_effectiveness.procedures),
 
         heading('Sample-Size Guidance'),
@@ -158,12 +158,12 @@ export function wordExportSingle(control: Control): Document {
           : []),
 
         // Evidence
-        heading('Evidence Requirements — Required'),
+        heading('Evidence Requirements â€” Required'),
         ...control.evidence_requirements.required.map((e) =>
           new Paragraph({
             children: [
               new TextRun({ text: e.item, bold: true, size: 20 }),
-              new TextRun({ text: ` — ${e.format} — ${e.frequency}`, size: 20, color: '64748B' }),
+              new TextRun({ text: ` â€” ${e.format} â€” ${e.frequency}`, size: 20, color: '64748B' }),
             ],
             spacing: { after: 60 },
             indent: { left: 360 },
@@ -171,12 +171,12 @@ export function wordExportSingle(control: Control): Document {
         ),
         ...(control.evidence_requirements.supporting.length > 0
           ? [
-              heading('Evidence Requirements — Supporting'),
+              heading('Evidence Requirements â€” Supporting'),
               ...control.evidence_requirements.supporting.map((e) =>
                 new Paragraph({
                   children: [
                     new TextRun({ text: e.item, bold: true, size: 20 }),
-                    new TextRun({ text: ` — ${e.format} — ${e.frequency}`, size: 20, color: '64748B' }),
+                    new TextRun({ text: ` â€” ${e.format} â€” ${e.frequency}`, size: 20, color: '64748B' }),
                   ],
                   spacing: { after: 60 },
                   indent: { left: 360 },
@@ -199,7 +199,7 @@ export function wordExportSingle(control: Control): Document {
           new Paragraph({
             children: [
               new TextRun({ text: `${r.title}`, size: 20 }),
-              new TextRun({ text: ` — ${r.url}`, size: 18, color: '64748B' }),
+              new TextRun({ text: ` â€” ${r.url}`, size: 18, color: '64748B' }),
             ],
             spacing: { after: 60 },
             indent: { left: 360 },

@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react';
+﻿import { useState, useMemo } from 'react';
 import { ChevronRight, ChevronLeft, Target, RotateCcw, Download, FileText } from 'lucide-react';
-import type { Control } from '../content/config';
+import type { Control } from '../content/schemas';
 import {
   scoreControls,
   getPhaseLabel,
@@ -238,7 +238,7 @@ function ScopeResults({
       {tiers['highly-recommended'].length > 0 && (
         <TierSection
           label="Highly Recommended"
-          description="Strong match across multiple dimensions — implement these first."
+          description="Strong match across multiple dimensions â€” implement these first."
           badgeClass="bg-accent-50 text-accent-700 ring-1 ring-inset ring-accent-200"
           items={tiers['highly-recommended']}
         />
@@ -247,7 +247,7 @@ function ScopeResults({
       {tiers.recommended.length > 0 && (
         <TierSection
           label="Recommended"
-          description="Good relevance — include in your control program."
+          description="Good relevance â€” include in your control program."
           badgeClass="bg-ok-50 text-ok-700"
           items={tiers.recommended}
         />
@@ -256,7 +256,7 @@ function ScopeResults({
       {tiers.consider.length > 0 && (
         <TierSection
           label="Consider"
-          description="Partial match — review applicability for your specific context."
+          description="Partial match â€” review applicability for your specific context."
           badgeClass="bg-warn-50 text-warn-700"
           items={tiers.consider}
         />

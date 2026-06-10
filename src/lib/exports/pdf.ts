@@ -1,5 +1,5 @@
-import jsPDF from 'jspdf';
-import type { Control } from '../../content/config';
+﻿import jsPDF from 'jspdf';
+import type { Control } from '../../content/schemas';
 
 const MARGIN = 14;
 const LINE = 5;
@@ -54,12 +54,12 @@ export function pdfExportSingle(control: Control): Blob {
   doc.setTextColor(0, 0, 0);
   y += LINE;
 
-  writeHeading(`${control.id} — ${control.title}`, 16);
+  writeHeading(`${control.id} â€” ${control.title}`, 16);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
   doc.setTextColor(100, 116, 139);
   doc.text(
-    `Version ${control.version} · ${control.category} · ${control.control_type} · Last reviewed ${control.last_reviewed}`,
+    `Version ${control.version} Â· ${control.category} Â· ${control.control_type} Â· Last reviewed ${control.last_reviewed}`,
     MARGIN,
     y,
   );
@@ -78,17 +78,17 @@ export function pdfExportSingle(control: Control): Blob {
   writeBody(control.control_narrative);
   y += 2;
 
-  writeHeading('Test of Design — Procedures');
+  writeHeading('Test of Design â€” Procedures');
   writeList(control.test_of_design.procedures);
   y += 2;
-  writeHeading('Test of Design — Inquiries');
+  writeHeading('Test of Design â€” Inquiries');
   writeList(control.test_of_design.inquiries);
   y += 2;
-  writeHeading('Test of Design — Inspections');
+  writeHeading('Test of Design â€” Inspections');
   writeList(control.test_of_design.inspections);
   y += 2;
 
-  writeHeading('Test of Operating Effectiveness — Procedures');
+  writeHeading('Test of Operating Effectiveness â€” Procedures');
   writeList(control.test_of_operating_effectiveness.procedures);
   y += 2;
 
@@ -100,10 +100,10 @@ export function pdfExportSingle(control: Control): Blob {
   writeBody(`High risk: ${s.high_risk}`);
   y += 2;
 
-  writeHeading('Evidence — Required');
+  writeHeading('Evidence â€” Required');
   writeList(
     control.evidence_requirements.required.map(
-      (e) => `${e.item} — ${e.format} — ${e.frequency}`,
+      (e) => `${e.item} â€” ${e.format} â€” ${e.frequency}`,
     ),
   );
   y += 2;
@@ -115,7 +115,7 @@ export function pdfExportSingle(control: Control): Blob {
   y += 2;
 
   writeHeading('References');
-  writeList(control.references.map((r) => `${r.title} — ${r.url}`));
+  writeList(control.references.map((r) => `${r.title} â€” ${r.url}`));
 
   const totalPages = doc.getNumberOfPages();
   for (let i = 1; i <= totalPages; i++) {
@@ -124,7 +124,7 @@ export function pdfExportSingle(control: Control): Blob {
     doc.setFontSize(8);
     doc.setTextColor(148, 163, 184);
     doc.text(
-      `${control.id} · v${control.version} · Page ${i} of ${totalPages} · CC-BY 4.0 · aicontrolscatalog.dev`,
+      `${control.id} Â· v${control.version} Â· Page ${i} of ${totalPages} Â· CC-BY 4.0 Â· aicontrolscatalog.dev`,
       MARGIN,
       pageHeight - 6,
     );

@@ -1,5 +1,5 @@
-import Papa from 'papaparse';
-import type { Control } from '../../content/config';
+﻿import Papa from 'papaparse';
+import type { Control } from '../../content/schemas';
 
 function flatten(c: Control) {
   const fm = c.framework_mappings;

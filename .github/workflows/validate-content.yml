@@ -4,7 +4,7 @@ on:
     paths:
       - 'src/content/**'
       - 'scripts/validate-content.ts'
-      - 'src/content/config.ts'
+      - 'src/content.config.ts'
 jobs:
   validate:
     runs-on: ubuntu-latest

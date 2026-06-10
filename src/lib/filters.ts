@@ -1,4 +1,4 @@
-import type { Control } from '../content/config';
+﻿import type { Control } from '../content/schemas';
 
 export interface FilterState {
   categories: string[];

@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react';
+﻿import { useMemo, useState } from 'react';
 import { Search, X, Download, FileText } from 'lucide-react';
 import Fuse from 'fuse.js';
-import type { Control } from '../content/config';
+import type { Control } from '../content/schemas';
 import { filterControls, emptyFilterState, type FilterState } from '../lib/filters';
 import { downloadCsv } from '../lib/exports/csv';
 import { downloadRcmExcel } from '../lib/exports/rcm-excel';

@@ -1,5 +1,5 @@
-import Fuse from 'fuse.js';
-import type { Control } from '../content/config';
+﻿import Fuse from 'fuse.js';
+import type { Control } from '../content/schemas';
 
 export function buildSearchIndex(controls: Control[]) {
   return new Fuse(controls, {
