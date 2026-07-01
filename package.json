@@ -18,7 +18,7 @@
   "dependencies": {
     "@astrojs/react": "^5.0.7",
     "@astrojs/sitemap": "^3.7.3",
-    "astro": "^6.4.5",
+    "astro": "^6.4.6",
     "docx": "^9.0.0",
     "exceljs": "^4.4.0",
     "fuse.js": "^7.0.0",
@@ -33,12 +33,12 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.9",
-    "autoprefixer": "^10.4.20",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.7.5",
     "@types/papaparse": "^5.3.14",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.20",
     "fake-indexeddb": "^6.0.0",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
