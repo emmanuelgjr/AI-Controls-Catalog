@@ -1,6 +1,6 @@
 {
   "name": "ai-controls-catalog",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The audit-ready controls library for AI systems.",
   "type": "module",
   "private": true,
