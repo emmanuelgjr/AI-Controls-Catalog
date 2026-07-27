@@ -2,11 +2,11 @@
 
 > The audit-ready controls library for AI systems.
 
-[![Site](https://img.shields.io/badge/site-aicontrolscatalog.dev-0F766E)](https://aicontrolscatalog.dev)
+[![Site](https://img.shields.io/badge/site-live-0F766E)](https://emmanuelgjr.github.io/AI-Controls-Catalog/)
 [![License: MIT](https://img.shields.io/badge/code-MIT-slate)](LICENSE)
 [![Content: CC-BY 4.0](https://img.shields.io/badge/content-CC--BY%204.0-0F766E)](CONTENT-LICENSE)
-[![Controls](https://img.shields.io/badge/controls-20-0F766E)](https://aicontrolscatalog.dev/controls)
-[![Last reviewed](https://img.shields.io/badge/last%20reviewed-2026--05-slate)](#)
+[![Controls](https://img.shields.io/badge/controls-20-0F766E)](https://emmanuelgjr.github.io/AI-Controls-Catalog/controls/)
+[![Last reviewed](https://img.shields.io/badge/last%20reviewed-2026--07-slate)](#)
 
 The first practitioner-grade, audit-ready catalog of AI controls. Every
 control includes objective, design narrative, Test of Design, Test of
@@ -15,7 +15,7 @@ framework mappings, and references.
 
 **Built for IT auditors, AI governance leads, CISOs, supervisory authorities.**
 
-[**Open the catalog →**](https://aicontrolscatalog.dev)
+[**Open the catalog →**](https://emmanuelgjr.github.io/AI-Controls-Catalog/)
 
 ---
 
@@ -26,18 +26,20 @@ systems. None of them define *how an auditor tests it*. Audit teams at
 banks, insurers, and consultancies are building this internally — slowly,
 inconsistently, expensively. This catalog fills that gap.
 
-## What's inside (v0.1)
+## What's inside (v0.2)
 
 - 20 controls across 14 categories
 - Framework mappings: ISO/IEC 42001, NIST AI RMF, EU AI Act, OWASP LLM Top
-  10, OWASP Agentic Top 10, OWASP DSGAI 2026, SOC 2, MITRE ATLAS
-- Filter, search, and export (PDF, CSV, JSON)
+  10, OWASP Agentic Top 10, OWASP DSGAI 2026, SOC 2, MITRE ATLAS, OSFI
+  E-21, NYDFS Part 500
+- **Scoping Wizard** — 6 steps, weighted scoring, relevance tiers and
+  implementation phases, with PDF/CSV export
+- Filter, search, and export (PDF, CSV, JSON), plus a 4-worksheet RCM Excel
+  workbook and per-control Word export
 - Methodology documentation and contribution guidance
 
 ## Roadmap (highlights)
 
-- **v0.2:** Scoping wizard, RCM Excel export, full SOC 2 + MITRE ATLAS
-  mappings, Word export.
 - **v0.3:** Submit-a-control PR flow, per-vertical packs (banking,
   healthcare, EU AI Act high-risk).
 - **v1.0:** 40+ controls, all 14 categories with ≥2 controls each, OSFI
@@ -59,8 +61,8 @@ in-house Red Team framework. Toronto-based. Trilingual (EN/PT/ES).
 ## Use it. Cite it.
 
 ```
-Guilherme Jr., E. (2026). AI Controls Catalog (Version 0.1.0).
-https://aicontrolscatalog.dev
+Guilherme Jr., E. (2026). AI Controls Catalog (Version 0.2.0).
+https://emmanuelgjr.github.io/AI-Controls-Catalog/
 ```
 
 ## Local development
