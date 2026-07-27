@@ -59,7 +59,7 @@ export function pdfExportSingle(control: Control): Blob {
   doc.setFontSize(9);
   doc.setTextColor(100, 116, 139);
   doc.text(
-    `Version ${control.version} Â· ${control.category} Â· ${control.control_type} Â· Last reviewed ${control.last_reviewed}`,
+    `Version ${control.version} · ${control.category} · ${control.control_type} · Last reviewed ${control.last_reviewed}`,
     MARGIN,
     y,
   );
@@ -124,7 +124,7 @@ export function pdfExportSingle(control: Control): Blob {
     doc.setFontSize(8);
     doc.setTextColor(148, 163, 184);
     doc.text(
-      `${control.id} Â· v${control.version} Â· Page ${i} of ${totalPages} Â· CC-BY 4.0 Â· aicontrolscatalog.dev`,
+      `${control.id} · v${control.version} · Page ${i} of ${totalPages} · CC-BY 4.0 · emmanuelgjr.github.io/AI-Controls-Catalog`,
       MARGIN,
       pageHeight - 6,
     );
