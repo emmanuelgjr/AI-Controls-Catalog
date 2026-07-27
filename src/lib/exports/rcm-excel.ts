@@ -32,7 +32,7 @@ function addTitle(ws: ExcelJS.Worksheet, title: string, colCount: number) {
   const row = ws.addRow([`AI Controls Catalog â€” ${title}`]);
   row.font = { bold: true, size: 12, color: { argb: `FF${ACCENT}` } };
   ws.mergeCells(1, 1, 1, Math.min(colCount, 8));
-  const dateRow = ws.addRow([`Exported ${new Date().toISOString().split('T')[0]} Â· CC-BY 4.0`]);
+  const dateRow = ws.addRow([`Exported ${new Date().toISOString().split('T')[0]} · CC-BY 4.0`]);
   dateRow.font = META_FONT;
   ws.addRow([]);
 }

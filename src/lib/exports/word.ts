@@ -77,9 +77,9 @@ export function wordExportSingle(control: Control): Document {
             new Paragraph({
               alignment: AlignmentType.CENTER,
               children: [
-                new TextRun({ text: `${control.id} Â· v${control.version} Â· Page `, size: 16, color: '94A3B8' }),
+                new TextRun({ text: `${control.id} · v${control.version} · Page `, size: 16, color: '94A3B8' }),
                 new TextRun({ children: [PageNumber.CURRENT], size: 16, color: '94A3B8' }),
-                new TextRun({ text: ` Â· CC-BY 4.0 Â· AI Controls Catalog`, size: 16, color: '94A3B8' }),
+                new TextRun({ text: ` · CC-BY 4.0 · AI Controls Catalog`, size: 16, color: '94A3B8' }),
               ],
             }),
           ],
@@ -99,7 +99,7 @@ export function wordExportSingle(control: Control): Document {
 
         new Paragraph({
           children: [
-            new TextRun({ text: `Version ${control.version} Â· ${control.category} Â· ${control.control_type} Â· Last reviewed ${control.last_reviewed}`, size: 18, color: '64748B' }),
+            new TextRun({ text: `Version ${control.version} · ${control.category} · ${control.control_type} · Last reviewed ${control.last_reviewed}`, size: 18, color: '64748B' }),
           ],
           spacing: { after: 240 },
         }),
